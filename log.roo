@@ -1,0 +1,13 @@
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-19 20:20:56
+hint
+project --topLevelPackage com.tajinsurance --projectName tajinsurance
+hint 
+persistence setup --provider HIBERNATE --database POSTGRES 
+entity jpa --class com.tajinsurance.domain.Contract
+// [failed] field string --fieldName number --class com.tajinsurance.domain.Contract --notNull
+field string --fieldName c_number --class com.tajinsurance.domain.Contract --notNull
+field string --fieldName c_memo --class com.tajinsurance.domain.Contract
+controller all --package com.tajinsurance.web
+logging setup --level INFO --package ALL_SPRING 
+q
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-02-19 20:35:15

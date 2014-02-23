@@ -1,0 +1,12 @@
+<aspectj>
+<aspects>
+<aspect name="com.tajinsurance.domain.Contract_Roo_Jpa_ActiveRecord"/>
+<aspect name="com.tajinsurance.domain.Contract_Roo_ToString"/>
+<aspect name="com.tajinsurance.domain.Contract_Roo_Jpa_Entity"/>
+<aspect name="com.tajinsurance.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
+<aspect name="com.tajinsurance.web.ContractController_Roo_Controller"/>
+<aspect name="com.tajinsurance.domain.Contract_Roo_Configurable"/>
+<aspect name="com.tajinsurance.domain.Contract_Roo_JavaBean"/>
+</aspects>
+</aspectj>
+
