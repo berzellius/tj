@@ -2,9 +2,128 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_com_tajinsurance_domain_Contract" modelAttribute="contract" path="/contracts" render="${empty dependencies}" z="7EEwS+c71NSUcR0jBKiFHFsc/hw=">
-        <field:input field="c_number" id="c_com_tajinsurance_domain_Contract_c_number" required="true" z="8kx0GHp5sHvOuEIXF3kQzcm3olk="/>
-        <field:input field="c_memo" id="c_com_tajinsurance_domain_Contract_c_memo" z="5GGdCDJerIT6Ooscm+NYepjtlDA="/>
-    </form:create>
+
+    <c:if test="${not empty errorMsg}">
+        <p style="color: red"><spring:message code="message_${errorMsg}" /></p>
+    </c:if>
+
+    <spring:url value="/" var="prefix" />
+
+    <script>
+
+    </script>
+
+    <spring:message code="label_contract_edit_title" var="title" />
+    <form:update title="${title}" id="fc_com_tajinsurance_domain_Contract" modelAttribute="contract" path="/contracts" versionField="Version" render="${empty dependencies}" z="7EEwS+c71NSUcR0jBKiFHFsc/hw=">
+
+        <label for="c_number"><spring:message code="label_com_tajinsurance_domain_contract_c_number" />:</label>
+        <div class="field">
+            <b>${contract.c_number}</b>
+            <br />
+        </div>
+
+
+        <label for="catContract"><spring:message code="label_com_tajinsurance_domain_contract_catcontract" />:</label>
+        <div class="field">
+            <b>${contract.catContract}</b>
+            <br />
+        </div>
+
+        <label for="catContractStatus"><spring:message code="label_com_tajinsurance_domain_contract_catcontractstatus" />:</label>
+        <div class="field">
+            <b>${contract.catContractStatus}</b>
+            <br />
+        </div>
+
+        <hr />
+
+        <div class="date">
+        <field:input id="c_com_tajinsurance_domain_Contract_start_date" field="startDate" classHTML="datepick" />
+        </div>
+
+
+
+        <div class="fields_in_line">
+            <label for="person"><spring:message code="label_com_tajinsurance_domain_person" /> </label>
+            <div>
+                <c:if test="${person_id eq 0}"><a href="" id="fill_person"><spring:message code="fill_in" /></a></c:if>
+                <c:if test="${person_id gt 0}"><a href="" id="fill_person"><spring:message code="change_in" /></a></c:if>
+            <p style="font-weight: bold" id="personValue"><a href="">${person}</a></p>
+            <p><input type="hidden" name="person" value="${person_id}" /></p></div>
+        </div>
+
+        <div style="display: none">
+            <field:input  field="c_number" id="c_com_tajinsurance_domain_Contract_c_number" required="true" z="8kx0GHp5sHvOuEIXF3kQzcm3olk="/>
+            <field:select id="c_com_tajinsurance_domain_Contract_CatContract" field="catContract" path="/catcontracts" items="${catContracts}" itemValue="id" />
+            <field:select id="c_com_tajinsurance_domain_Contract_CatContractStatus" field="catContractStatus" path="/catcontractstatuses" items="${catContractStatuses}" itemValue="id" />
+            <field:select id="c_com_tajinsurance_domain_Contract_partner" field="partner" path="/partners" items="${partners}" itemValue="id" />
+            <field:input id="c_com_tajinsurance_domain_Contract_print_date" field="printDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_app_date" field="appDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_pay_date" field="payDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_end_date" field="endDate" />
+            <field:select id="c_com_tajinsurance_domain_Contract_partner" field="partner" path="/partners" items="${partners}" itemValue="id" />
+        </div>
+        <field:input id="c_com_tajinsurance_domain_Contract_length" validationRegex="[0-9]+" field="length" />
+
+
+        <hr />
+
+        <p><spring:message code="label_c_com_tajinsurance_domain_Contract_contractPremiums" /></p>
+        <p>
+            <span><spring:message code="label_calculate_risk" />&#xA0;</span>
+            <select id="risk_allowed">
+                <c:forEach items="${allowedRisks}" var="risk">
+                    <option value="${risk.riskId}">${risk.name}</option>
+                </c:forEach>
+            </select>&#xA0;
+            <spring:message code="label_sum" />
+            <spring:message code="button_calc" var="calc" />
+            <!-- TODO только цифры! -->
+            <input type="text" class="digits" id="risk_sum" />&#xA0;
+            <input type="button" id="buttonCalcRisk" value="${calc}" />
+            <input type="hidden" id="contractIdField" value="${contract.id}" />
+        </p>
+
+        <div id="calcRisks">
+            <table>
+                <tr><td colspan="4">Calculated:</td></tr>
+                <tr  id="calcRisksTr"><th>Риск</th><th>Сумма</th><th>Премия</th><th>Удалить</th></tr>
+                <!-- Рассчитанные через Ajax, но еще неподтвержленные риски -->
+                <c:if test="${not empty notValidatedPremiums}">
+                    <c:forEach items="${notValidatedPremiums}" var="premium">
+                        <spring:url value="/risk?del" var="deleteLink">
+                            <spring:param name="id" value="${premium.premiumId}" />
+                        </spring:url>
+                        <tr id="pr${premium.premiumId}">
+                            <td>${premium.risk}</td>
+                            <td>${premium.insuredSum}</td>
+                            <td>${premium.premium}</td>
+                            <td><a class="deletePremium" href="${deleteLink}">Удалить</a></td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+                <!-- TODO здесь тоже могут быть данные при загрузке страницы. Например, когда риски насчитали и закрыли браузер -->
+                <tr><td colspan="4">Saved:</td></tr>
+                <tr  id="savedRisksTr"><th>Риск</th><th>Сумма</th><th>Премия</th><th>Удалить</th></tr>
+                <!-- Рассчитанные подтвержденные риски -->
+                <c:if test="${not empty validatedPremiums}">
+                    <c:forEach items="${validatedPremiums}" var="premium">
+                        <spring:url value="/risk?del" var="deleteLink">
+                            <spring:param name="id" value="${premium.premiumId}" />
+                        </spring:url>
+                        <tr id="pr${premium.premiumId}">
+                            <td>${premium.risk}</td>
+                            <td>${premium.insuredSum}</td>
+                            <td>${premium.premium}</td>
+                            <td><a class="deletePremium" href="${deleteLink}">Удалить</a></td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
+            </table>
+        </div>
+
+    </form:update>
     <form:dependency dependencies="${dependencies}" id="d_com_tajinsurance_domain_Contract" render="${not empty dependencies}" z="Gge8dkv/L9B+uQ5gDNyTtkSpXIY="/>
+
+
 </div>

@@ -3,16 +3,22 @@
 
 package com.tajinsurance.domain;
 
-import com.tajinsurance.domain.Contract;
-import java.util.List;
+import org.hibernate.Session;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 privileged aspect Contract_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
     transient EntityManager Contract.entityManager;
+
+    Session session = Contract.entityManager().unwrap(Session.class);
+
+
     
     public static final List<String> Contract.fieldNames4OrderClauseFilter = java.util.Arrays.asList("c_number", "c_memo");
     
@@ -61,13 +67,13 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery(jpaQuery, Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
@@ -78,19 +84,19 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
         }
     }
     
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
-    @Transactional
+    @Transactional(propagation = Propagation.MANDATORY)
     public Contract Contract.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         Contract merged = this.entityManager.merge(this);

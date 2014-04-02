@@ -18,6 +18,8 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     _jspx_dependants.add("/WEB-INF/tags/menu/item.tagx");
   }
 
+  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess;
+
   private javax.el.ExpressionFactory _el_expressionfactory;
   private org.apache.AnnotationProcessor _jsp_annotationprocessor;
 
@@ -26,11 +28,13 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspInit() {
+    _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _el_expressionfactory = _jspxFactory.getJspApplicationContext(getServletConfig().getServletContext()).getExpressionFactory();
     _jsp_annotationprocessor = (org.apache.AnnotationProcessor) getServletConfig().getServletContext().getAttribute(org.apache.AnnotationProcessor.class.getName());
   }
 
   public void _jspDestroy() {
+    _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -57,7 +61,7 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write("<div version=\"2.0\" id=\"menu\">");
+      out.write("<div xmlns:security=\"http://www.springframework.org/schema/security\" version=\"2.0\" id=\"menu\">");
       if (_jspx_meth_menu_005fmenu_005f0(_jspx_page_context))
         return;
       out.write("</div>");
@@ -81,9 +85,9 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.apache.jsp.tag.web.menu.menu_tagx _jspx_th_menu_005fmenu_005f0 = new org.apache.jsp.tag.web.menu.menu_tagx();
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_menu_005fmenu_005f0);
     _jspx_th_menu_005fmenu_005f0.setJspContext(_jspx_page_context);
-    // /WEB-INF/views/menu.jspx(5,60) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(7,60) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fmenu_005f0.setZ("nZaf43BjUg1iM0v70HJVEsXDopc=");
-    // /WEB-INF/views/menu.jspx(5,60) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(7,60) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fmenu_005f0.setId("_menu");
     _jspx_th_menu_005fmenu_005f0.setJspBody(new Helper( 0, _jspx_page_context, _jspx_th_menu_005fmenu_005f0, null));
     _jspx_th_menu_005fmenu_005f0.doTag();
@@ -91,7 +95,30 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_menu_005fcategory_005f0(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
+  private boolean _jspx_meth_sec_005fauthorize_005f0(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  sec:authorize
+    org.springframework.security.taglibs.authz.JspAuthorizeTag _jspx_th_sec_005fauthorize_005f0 = (org.springframework.security.taglibs.authz.JspAuthorizeTag) _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess.get(org.springframework.security.taglibs.authz.JspAuthorizeTag.class);
+    _jspx_th_sec_005fauthorize_005f0.setPageContext(_jspx_page_context);
+    _jspx_th_sec_005fauthorize_005f0.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) _jspx_parent));
+    // /WEB-INF/views/menu.jspx(8,69) name = access type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_sec_005fauthorize_005f0.setAccess("hasAnyRole('ROLE_USER_PARTNER')");
+    int _jspx_eval_sec_005fauthorize_005f0 = _jspx_th_sec_005fauthorize_005f0.doStartTag();
+    if (_jspx_eval_sec_005fauthorize_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_meth_menu_005fcategory_005f0(_jspx_th_sec_005fauthorize_005f0, _jspx_page_context))
+        return true;
+    }
+    if (_jspx_th_sec_005fauthorize_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess.reuse(_jspx_th_sec_005fauthorize_005f0);
+      throw new SkipPageException();
+    }
+    _005fjspx_005ftagPool_005fsec_005fauthorize_0026_005faccess.reuse(_jspx_th_sec_005fauthorize_005f0);
+    return false;
+  }
+
+  private boolean _jspx_meth_menu_005fcategory_005f0(javax.servlet.jsp.tagext.JspTag _jspx_th_sec_005fauthorize_005f0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
@@ -99,10 +126,10 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.apache.jsp.tag.web.menu.category_tagx _jspx_th_menu_005fcategory_005f0 = new org.apache.jsp.tag.web.menu.category_tagx();
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_menu_005fcategory_005f0);
     _jspx_th_menu_005fcategory_005f0.setJspContext(_jspx_page_context);
-    _jspx_th_menu_005fcategory_005f0.setParent(_jspx_parent);
-    // /WEB-INF/views/menu.jspx(6,73) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    _jspx_th_menu_005fcategory_005f0.setParent(_jspx_th_sec_005fauthorize_005f0);
+    // /WEB-INF/views/menu.jspx(9,81) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fcategory_005f0.setZ("4+ZfkynELtH01Q9VUMSOoTGwqPA=");
-    // /WEB-INF/views/menu.jspx(6,73) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(9,81) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fcategory_005f0.setId("c_contract");
     _jspx_th_menu_005fcategory_005f0.setJspBody(new Helper( 1, _jspx_page_context, _jspx_th_menu_005fcategory_005f0, null));
     _jspx_th_menu_005fcategory_005f0.doTag();
@@ -119,13 +146,11 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_menu_005fitem_005f0);
     _jspx_th_menu_005fitem_005f0.setJspContext(_jspx_page_context);
     _jspx_th_menu_005fitem_005f0.setParent(_jspx_parent);
-    // /WEB-INF/views/menu.jspx(7,130) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
-    _jspx_th_menu_005fitem_005f0.setZ("Ywk8JpUEsv3Yi6GdSROwzM7phdc=");
-    // /WEB-INF/views/menu.jspx(7,130) name = url type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
-    _jspx_th_menu_005fitem_005f0.setUrl("/contracts?form");
-    // /WEB-INF/views/menu.jspx(7,130) name = messageCode type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(10,117) name = url type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    _jspx_th_menu_005fitem_005f0.setUrl("/contracts?select_category");
+    // /WEB-INF/views/menu.jspx(10,117) name = messageCode type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f0.setMessageCode("global_menu_new");
-    // /WEB-INF/views/menu.jspx(7,130) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(10,117) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f0.setId("i_contract_new");
     _jspx_th_menu_005fitem_005f0.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_menu_005fitem_005f0);
@@ -141,13 +166,13 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_menu_005fitem_005f1);
     _jspx_th_menu_005fitem_005f1.setJspContext(_jspx_page_context);
     _jspx_th_menu_005fitem_005f1.setParent(_jspx_parent);
-    // /WEB-INF/views/menu.jspx(8,181) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(11,189) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f1.setZ("T8YOGqikEgnHJfLf0mVomxbN/GI=");
-    // /WEB-INF/views/menu.jspx(8,181) name = url type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(11,189) name = url type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f1.setUrl((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("/contracts?page=1&size=${empty param.size ? 10 : param.size}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-    // /WEB-INF/views/menu.jspx(8,181) name = messageCode type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(11,189) name = messageCode type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f1.setMessageCode("global_menu_list");
-    // /WEB-INF/views/menu.jspx(8,181) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/menu.jspx(11,189) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_menu_005fitem_005f1.setId("i_contract_list");
     _jspx_th_menu_005fitem_005f1.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_menu_005fitem_005f1);
@@ -168,7 +193,7 @@ public final class menu_jspx extends org.apache.jasper.runtime.HttpJspBase
     public boolean invoke0( JspWriter out ) 
       throws Throwable
     {
-      if (_jspx_meth_menu_005fcategory_005f0(_jspx_parent, _jspx_page_context))
+      if (_jspx_meth_sec_005fauthorize_005f0(_jspx_parent, _jspx_page_context))
         return true;
       return false;
     }

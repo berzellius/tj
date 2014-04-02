@@ -137,6 +137,7 @@ static {
           getJspBody().invoke(_jspx_sout);
         jspContext.getELContext().putContext(JspContext.class,getJspContext());
         out.write("</ul>");
+        out.write("<div class=\"clearboth\"/>");
         int evalDoAfterBody = _jspx_th_c_005fif_005f0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;

@@ -18,8 +18,6 @@ public final class index_jspx extends org.apache.jasper.runtime.HttpJspBase
 
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005fnobody;
   private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005farguments_005fnobody;
-  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005farguments_005fnobody;
-  private org.apache.jasper.runtime.TagHandlerPool _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005fnobody;
 
   private javax.el.ExpressionFactory _el_expressionfactory;
   private org.apache.AnnotationProcessor _jsp_annotationprocessor;
@@ -31,8 +29,6 @@ public final class index_jspx extends org.apache.jasper.runtime.HttpJspBase
   public void _jspInit() {
     _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005farguments_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005farguments_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005fnobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _el_expressionfactory = _jspxFactory.getJspApplicationContext(getServletConfig().getServletContext()).getExpressionFactory();
     _jsp_annotationprocessor = (org.apache.AnnotationProcessor) getServletConfig().getServletContext().getAttribute(org.apache.AnnotationProcessor.class.getName());
   }
@@ -40,8 +36,6 @@ public final class index_jspx extends org.apache.jasper.runtime.HttpJspBase
   public void _jspDestroy() {
     _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005fnobody.release();
     _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fvar_005fhtmlEscape_005fcode_005farguments_005fnobody.release();
-    _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005farguments_005fnobody.release();
-    _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005fnobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -164,119 +158,8 @@ public final class index_jspx extends org.apache.jasper.runtime.HttpJspBase
     _jspx_th_util_005fpanel_005f0.setTitle((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${title}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
     // /WEB-INF/views/index.jspx(6,43) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_util_005fpanel_005f0.setId("title");
-    _jspx_th_util_005fpanel_005f0.setJspBody(new Helper( 0, _jspx_page_context, _jspx_th_util_005fpanel_005f0, null));
     _jspx_th_util_005fpanel_005f0.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_util_005fpanel_005f0);
     return false;
-  }
-
-  private boolean _jspx_meth_spring_005fmessage_005f2(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  spring:message
-    org.springframework.web.servlet.tags.MessageTag _jspx_th_spring_005fmessage_005f2 = (org.springframework.web.servlet.tags.MessageTag) _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005farguments_005fnobody.get(org.springframework.web.servlet.tags.MessageTag.class);
-    _jspx_th_spring_005fmessage_005f2.setPageContext(_jspx_page_context);
-    _jspx_th_spring_005fmessage_005f2.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) _jspx_parent));
-    // /WEB-INF/views/index.jspx(8,67) name = arguments type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_spring_005fmessage_005f2.setArguments((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${app_name}", java.lang.Object.class, (PageContext)_jspx_page_context, null, false));
-    // /WEB-INF/views/index.jspx(8,67) name = code type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_spring_005fmessage_005f2.setCode("welcome_h3");
-    int[] _jspx_push_body_count_spring_005fmessage_005f2 = new int[] { 0 };
-    try {
-      int _jspx_eval_spring_005fmessage_005f2 = _jspx_th_spring_005fmessage_005f2.doStartTag();
-      if (_jspx_th_spring_005fmessage_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-        throw new SkipPageException();
-      }
-    } catch (Throwable _jspx_exception) {
-      while (_jspx_push_body_count_spring_005fmessage_005f2[0]-- > 0)
-        out = _jspx_page_context.popBody();
-      _jspx_th_spring_005fmessage_005f2.doCatch(_jspx_exception);
-    } finally {
-      _jspx_th_spring_005fmessage_005f2.doFinally();
-      _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005farguments_005fnobody.reuse(_jspx_th_spring_005fmessage_005f2);
-    }
-    return false;
-  }
-
-  private boolean _jspx_meth_spring_005fmessage_005f3(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  spring:message
-    org.springframework.web.servlet.tags.MessageTag _jspx_th_spring_005fmessage_005f3 = (org.springframework.web.servlet.tags.MessageTag) _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005fnobody.get(org.springframework.web.servlet.tags.MessageTag.class);
-    _jspx_th_spring_005fmessage_005f3.setPageContext(_jspx_page_context);
-    _jspx_th_spring_005fmessage_005f3.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) _jspx_parent));
-    // /WEB-INF/views/index.jspx(11,45) name = code type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_spring_005fmessage_005f3.setCode("welcome_text");
-    int[] _jspx_push_body_count_spring_005fmessage_005f3 = new int[] { 0 };
-    try {
-      int _jspx_eval_spring_005fmessage_005f3 = _jspx_th_spring_005fmessage_005f3.doStartTag();
-      if (_jspx_th_spring_005fmessage_005f3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-        throw new SkipPageException();
-      }
-    } catch (Throwable _jspx_exception) {
-      while (_jspx_push_body_count_spring_005fmessage_005f3[0]-- > 0)
-        out = _jspx_page_context.popBody();
-      _jspx_th_spring_005fmessage_005f3.doCatch(_jspx_exception);
-    } finally {
-      _jspx_th_spring_005fmessage_005f3.doFinally();
-      _005fjspx_005ftagPool_005fspring_005fmessage_0026_005fcode_005fnobody.reuse(_jspx_th_spring_005fmessage_005f3);
-    }
-    return false;
-  }
-
-  private class Helper
-      extends org.apache.jasper.runtime.JspFragmentHelper
-  {
-    private javax.servlet.jsp.tagext.JspTag _jspx_parent;
-    private int[] _jspx_push_body_count;
-
-    public Helper( int discriminator, JspContext jspContext, javax.servlet.jsp.tagext.JspTag _jspx_parent, int[] _jspx_push_body_count ) {
-      super( discriminator, jspContext, _jspx_parent );
-      this._jspx_parent = _jspx_parent;
-      this._jspx_push_body_count = _jspx_push_body_count;
-    }
-    public boolean invoke0( JspWriter out ) 
-      throws Throwable
-    {
-      out.write("<h3>");
-      if (_jspx_meth_spring_005fmessage_005f2(_jspx_parent, _jspx_page_context))
-        return true;
-      out.write("</h3>");
-      out.write("<p>");
-      if (_jspx_meth_spring_005fmessage_005f3(_jspx_parent, _jspx_page_context))
-        return true;
-      out.write("</p>");
-      return false;
-    }
-    public void invoke( java.io.Writer writer )
-      throws JspException
-    {
-      JspWriter out = null;
-      if( writer != null ) {
-        out = this.jspContext.pushBody(writer);
-      } else {
-        out = this.jspContext.getOut();
-      }
-      try {
-        this.jspContext.getELContext().putContext(JspContext.class,this.jspContext);
-        switch( this.discriminator ) {
-          case 0:
-            invoke0( out );
-            break;
-        }
-      }
-      catch( Throwable e ) {
-        if (e instanceof SkipPageException)
-            throw (SkipPageException) e;
-        throw new JspException( e );
-      }
-      finally {
-        if( writer != null ) {
-          this.jspContext.popBody();
-        }
-      }
-    }
   }
 }

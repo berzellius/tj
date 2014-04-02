@@ -68,4 +68,21 @@
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager"></bean>
+    <bean class="com.tajinsurance.service.ContractServiceImpl" id="contractService" autowire="byType">
+    </bean>
+    <bean class="com.tajinsurance.service.CatContractServiceImpl" id="catContractService" autowire="byType">
+    </bean>
+    <bean class="com.tajinsurance.service.CatContractStatusServiceImpl" id="catContractStatusService" autowire="byType">
+    </bean>
+    <bean class="com.tajinsurance.service.PartnerServiceImpl" id="partnerService" autowire="byType">
+    </bean>
+    <bean class="com.tajinsurance.service.PersonServiceImpl" id="personService" autowire="byType">
+    </bean>
+    <bean class="com.tajinsurance.utils.UserDetailsServiceImpl" id="userDetailsService" autowire="byType"></bean>
+    <bean class="com.tajinsurance.utils.UserLoginUtilImpl" id="userLoginUtil" autowire="byType"></bean>
+    <bean class="com.tajinsurance.utils.CodeUtilsImpl" id="codeUtils" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.RiskServiceImpl" id="riskService" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.PremiumServiceImpl" id="premiumService" autowire="byType"></bean>
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 </beans>

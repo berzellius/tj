@@ -9,5 +9,6 @@
 		<ul id="${fn:escapeXml(id)}">
 			<jsp:doBody />
 		</ul>
+        <div class="clearboth"></div>
 	</c:if>
 </jsp:root>

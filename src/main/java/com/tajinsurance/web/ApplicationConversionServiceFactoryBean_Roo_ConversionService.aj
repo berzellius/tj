@@ -4,15 +4,14 @@
 package com.tajinsurance.web;
 
 import com.tajinsurance.domain.Contract;
-import com.tajinsurance.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
-    
-    declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
-    
+
+    declare @type: ApplicationConversionServiceFactoryBean:@Configurable;
+
     public Converter<Contract, String> ApplicationConversionServiceFactoryBean.getContractToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.tajinsurance.domain.Contract, java.lang.String>() {
             public String convert(Contract contract) {
@@ -20,7 +19,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
             }
         };
     }
-    
+
     public Converter<Long, Contract> ApplicationConversionServiceFactoryBean.getIdToContractConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.tajinsurance.domain.Contract>() {
             public com.tajinsurance.domain.Contract convert(java.lang.Long id) {
@@ -28,7 +27,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
             }
         };
     }
-    
+
     public Converter<String, Contract> ApplicationConversionServiceFactoryBean.getStringToContractConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.tajinsurance.domain.Contract>() {
             public com.tajinsurance.domain.Contract convert(String id) {
@@ -36,16 +35,17 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
             }
         };
     }
-    
+
+
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getContractToStringConverter());
         registry.addConverter(getIdToContractConverter());
         registry.addConverter(getStringToContractConverter());
     }
-    
+
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {
         super.afterPropertiesSet();
         installLabelConverters(getObject());
     }
-    
+
 }
