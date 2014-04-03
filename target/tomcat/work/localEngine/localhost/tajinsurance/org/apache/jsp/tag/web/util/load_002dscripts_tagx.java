@@ -108,6 +108,8 @@ static {
       out.write("</script>");
       out.write("<script type=\"text/javascript\" src=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/javascript/premium.js", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\">");
       out.write("</script>");
+      out.write("<script type=\"text/javascript\" src=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/javascript/contract_lifecycle.js", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\">");
+      out.write("</script>");
       out.write("<script type=\"text/javascript\" src=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/javascript/datepicker.js", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\">");
       out.write("</script>");
       out.write("<script type=\"text/javascript\" src=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/javascript/regex.js", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\">");
@@ -118,6 +120,7 @@ static {
       out.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/javascript/ui/jquery-ui-1.10.4.custom.css", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\"/>");
       out.write("<link href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${tundra_url}", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\" type=\"text/css\" rel=\"stylesheet\"/>");
       out.write("<link href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${roo_css_url}", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\" media=\"screen\" type=\"text/css\" rel=\"stylesheet\"/>");
+      out.write("<link href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${prefix}/styles/print.css", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\" media=\"print\" type=\"text/css\" rel=\"stylesheet\"/>");
       out.write("<link href=\"" + (java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${favicon}", java.lang.String.class, (PageContext)this.getJspContext(), null, false) + "\" rel=\"SHORTCUT ICON\"/>");
       if (_jspx_meth_c_005fset_005f0(_jspx_page_context))
         return;
@@ -376,7 +379,7 @@ static {
     //  c:set
     org.apache.taglibs.standard.tag.rt.core.SetTag _jspx_th_c_005fset_005f0 = (org.apache.taglibs.standard.tag.rt.core.SetTag) _005fjspx_005ftagPool_005fc_005fset_0026_005fvar.get(org.apache.taglibs.standard.tag.rt.core.SetTag.class);
     _jspx_th_c_005fset_005f0.setPageContext(_jspx_page_context);
-    _jspx_th_c_005fset_005f0.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) this ));    // /WEB-INF/tags/util/load-scripts.tagx(32,29) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fset_005f0.setParent(new javax.servlet.jsp.tagext.TagAdapter((javax.servlet.jsp.tagext.SimpleTag) this ));    // /WEB-INF/tags/util/load-scripts.tagx(34,29) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fset_005f0.setVar("userLocale");
     int _jspx_eval_c_005fset_005f0 = _jspx_th_c_005fset_005f0.doStartTag();
     if (_jspx_eval_c_005fset_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -413,7 +416,7 @@ static {
     org.apache.taglibs.standard.tag.rt.core.SetTag _jspx_th_c_005fset_005f1 = (org.apache.taglibs.standard.tag.rt.core.SetTag) _005fjspx_005ftagPool_005fc_005fset_0026_005fvar.get(org.apache.taglibs.standard.tag.rt.core.SetTag.class);
     _jspx_th_c_005fset_005f1.setPageContext(_jspx_page_context);
     _jspx_th_c_005fset_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fset_005f0);
-    // /WEB-INF/tags/util/load-scripts.tagx(33,30) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/tags/util/load-scripts.tagx(35,30) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fset_005f1.setVar("plocale");
     int _jspx_eval_c_005fset_005f1 = _jspx_th_c_005fset_005f1.doStartTag();
     if (_jspx_eval_c_005fset_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -447,9 +450,9 @@ static {
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_005fout_005f0 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _005fjspx_005ftagPool_005fc_005fout_0026_005fvalue_005fdefault_005fnobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_005fout_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fout_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fset_005f0);
-    // /WEB-INF/tags/util/load-scripts.tagx(34,71) name = default type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/tags/util/load-scripts.tagx(36,71) name = default type = null reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fout_005f0.setDefault("en");
-    // /WEB-INF/tags/util/load-scripts.tagx(34,71) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/tags/util/load-scripts.tagx(36,71) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fout_005f0.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${fn:replace(plocale, '_', '-')}", java.lang.Object.class, (PageContext)this.getJspContext(), _jspx_fnmap_0, false));
     int _jspx_eval_c_005fout_005f0 = _jspx_th_c_005fout_005f0.doStartTag();
     if (_jspx_th_c_005fout_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {

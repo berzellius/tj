@@ -10,7 +10,7 @@
            <spring:url value="/contracts?form" var="link">
                <spring:param name="category" value="${cat.id}" />
            </spring:url>
-           <p><a href="${link}">${cat.name} [${cat.value}]</a></p>
+           <p><a href="${link}">${cat.name} [${cat.value}] - ${cat.currency.val}</a></p>
         </c:forEach>
     </c:if>
     </util:panel>

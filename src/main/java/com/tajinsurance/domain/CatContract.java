@@ -22,6 +22,10 @@ public class CatContract {
 
     private String value;
 
+    @JoinColumn(name = "currency_id")
+    @OneToOne
+    private Currency currency;
+
     /*@ManyToMany
     @JoinTable(
             name = "cat_contract_risk_map",
@@ -72,6 +76,14 @@ public class CatContract {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     /*public Set<Risk> getRisks() {

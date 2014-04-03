@@ -16,6 +16,22 @@
     <spring:message code="label_contract_edit_title" var="title" />
     <form:update title="${title}" id="fc_com_tajinsurance_domain_Contract" modelAttribute="contract" path="/contracts" versionField="Version" render="${empty dependencies}" z="7EEwS+c71NSUcR0jBKiFHFsc/hw=">
 
+        <spring:message code="label_contract_save" var="save" />
+        <spring:message code="label_contract_print" var="print" />
+        <spring:message code="label_contract_close" var="close" />
+
+        <div>
+            <ul id="contract_main">
+                <li><input type="button" id="contractSave" value="${save}" /></li>
+
+                <c:if test="${printable}">
+                    <li><input type="button" id="contractPrint" value="${print}" /></li>
+                </c:if>
+                <li><input type="button" id="contractClose" value="${close}" /></li>
+            </ul>
+            <div class="clearboth"></div>
+        </div>
+
         <label for="c_number"><spring:message code="label_com_tajinsurance_domain_contract_c_number" />:</label>
         <div class="field">
             <b>${contract.c_number}</b>
@@ -25,7 +41,7 @@
 
         <label for="catContract"><spring:message code="label_com_tajinsurance_domain_contract_catcontract" />:</label>
         <div class="field">
-            <b>${contract.catContract}</b>
+            <b>${contract.catContract} [${cur}]</b>
             <br />
         </div>
 
@@ -102,7 +118,6 @@
                         </tr>
                     </c:forEach>
                 </c:if>
-                <!-- TODO здесь тоже могут быть данные при загрузке страницы. Например, когда риски насчитали и закрыли браузер -->
                 <tr><td colspan="4">Saved:</td></tr>
                 <tr  id="savedRisksTr"><th>Риск</th><th>Сумма</th><th>Премия</th><th>Удалить</th></tr>
                 <!-- Рассчитанные подтвержденные риски -->
@@ -121,6 +136,8 @@
                 </c:if>
             </table>
         </div>
+
+
 
     </form:update>
     <form:dependency dependencies="${dependencies}" id="d_com_tajinsurance_domain_Contract" render="${not empty dependencies}" z="Gge8dkv/L9B+uQ5gDNyTtkSpXIY="/>

@@ -23,6 +23,7 @@ C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Contract_Roo_Jav
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Contract_Roo_Jpa_ActiveRecord.aj
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Contract_Roo_Jpa_Entity.aj
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Contract_Roo_ToString.aj
+C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Currency.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Division.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\LocaleEntity.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\Partner.java
@@ -33,6 +34,7 @@ C:\projects\tadjinsurance\src\main\java\com\tajinsurance\domain\UserRole.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\AjaxAction.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\CalculateRiskAjaxAction.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\ContractPremiumAjax.java
+C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\ContractPrintAjax.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\DeletePremuimAjaxAction.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonAjax.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonSaveAjaxAction.java

@@ -125,3 +125,8 @@ INSERT INTO risk(
 INSERT INTO cat_contract_risk(
             id, rate, cat_contract_id, risk_id)
     VALUES (1, 0.5, 1, 1);
+
+
+INSERT INTO currency(
+            id, val, name)
+    VALUES (1, 'RUR', 'Russian rouble');

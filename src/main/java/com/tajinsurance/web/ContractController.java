@@ -1,10 +1,9 @@
 package com.tajinsurance.web;
 
-import com.tajinsurance.domain.CatContract;
-import com.tajinsurance.domain.CatContractStatus;
-import com.tajinsurance.domain.Contract;
-import com.tajinsurance.domain.User;
+import com.google.gson.Gson;
+import com.tajinsurance.domain.*;
 import com.tajinsurance.dto.ContractPremiumAjax;
+import com.tajinsurance.dto.ContractPrintAjax;
 import com.tajinsurance.dto.RiskAjax;
 import com.tajinsurance.exceptions.EntityNotSavedException;
 import com.tajinsurance.exceptions.NoEntityException;
@@ -15,10 +14,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -93,12 +89,28 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/{id}", produces = "text/html")
-    public String show(@PathVariable("id") Long id, Model uiModel) {
+    public String show(
+            @PathVariable("id") Long id,
+            @RequestParam(value = "print", required = false) String print,
+            Model uiModel
+    ) {
 
         try {
+            if(print != null) uiModel.addAttribute("print_version",true);
+
             Locale locale = LocaleContextHolder.getLocale();
-            uiModel.addAttribute("contract", contractService.getContractById(id));
+            Contract contract = contractService.getContractById(id);
+            uiModel.addAttribute("contract", contract);
+            uiModel.addAttribute("cur", contract.getCatContract().getCurrency());
             uiModel.addAttribute("itemId", id);
+
+            List<ContractPremiumAjax> validatedPremiums = premiumService.getValidatedPremiums(contract);
+            uiModel.addAttribute("validatedPremiums", validatedPremiums);
+
+            Person p = contract.getPerson();
+            if(p != null) uiModel.addAttribute("person",p);
+
+
             /*System.out.println(locale.toString());*/
         } catch (NoEntityException e) {
             uiModel.addAttribute("error", e.getMessage());
@@ -173,6 +185,15 @@ public class ContractController {
             Contract c = contractService.getContractById(id);
             populateEditForm(uiModel, c);
 
+            switch (c.getCatContractStatus().getCode()){
+                case BEGIN:
+                    uiModel.addAttribute("printable", false);
+                break;
+                default:
+                    uiModel.addAttribute("printable", true);
+                break;
+            }
+
             List<RiskAjax> risks = catContractService.getAllowedRisksForCatContract(c.getCatContract());
 
             List<ContractPremiumAjax> notValidatedPremiums = premiumService.getNotValidatedPremiums(c);
@@ -184,6 +205,10 @@ public class ContractController {
 
 
             uiModel.addAttribute("allowedRisks", risks);
+
+            uiModel.addAttribute("cur", (
+                    c.getCatContract().getCurrency() == null ? "N/A" : c.getCatContract().getCurrency().getVal())
+            );
 
             uiModel.addAttribute("catContracts", catContractService.getAllowedCatContractsForUser(currectUser, locale.toString()));
             uiModel.addAttribute("catContractStatuses", catContractStatusService.getAllCatContractStatuses(locale.toString()));
@@ -234,5 +259,33 @@ public class ContractController {
         uiModel.addAttribute("contractCategories", catContractService.getAllowedCatContractsForUser(currectUser, locale.toString() ));
 
         return "contracts/select_category";
+    }
+
+    @RequestMapping(params = "print", method = RequestMethod.GET)
+    @ResponseBody byte[] printContract(
+            @RequestParam(value = "id") Long id
+    ){
+
+        Gson gson = new Gson();
+        ContractPrintAjax cpa = new ContractPrintAjax();
+
+        try {
+            Contract c = contractService.getContractById(id);
+            cpa.printDate = contractService.printContract(c);
+            cpa.success = true;
+        } catch (NoEntityException e) {
+            cpa.success = false;
+            cpa.message = "Cant find Contract entity #"+id;
+        }
+        finally {
+            String g = gson.toJson(cpa);
+            try {
+                return g.getBytes("UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
     }
 }

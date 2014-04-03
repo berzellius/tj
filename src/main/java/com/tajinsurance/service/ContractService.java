@@ -8,6 +8,7 @@ import com.tajinsurance.exceptions.EntityNotSavedException;
 import com.tajinsurance.exceptions.NoEntityException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,6 +73,13 @@ public interface ContractService {
      * @return
      */
     boolean checkIfTheRiskIsAllowed(Risk risk, Contract contract);
+
+
+    /**
+     * Бизнес логика: печать договора
+     * @param c
+     */
+    Date printContract(Contract c);
 
     /**
      * Количество страниц

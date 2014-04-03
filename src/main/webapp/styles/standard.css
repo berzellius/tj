@@ -435,3 +435,16 @@ div.inputs_block{
     padding: 5px;
     margin: 10px auto 10px auto;
 }
+
+ul#contract_main{
+    list-style: none;
+}
+ul#contract_main li{
+    float:left;
+    margin: 10px;
+    min-width: 150px;
+}
+
+ul#contract_main li input[type=button]{
+    min-width:100px
+}

@@ -1,0 +1,9 @@
+div#menu, div#footer, div.quicklinks{
+    display:none
+}
+label{
+    float: left;
+}
+div.field{
+    clear:both
+}

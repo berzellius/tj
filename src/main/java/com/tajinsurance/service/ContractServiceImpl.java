@@ -6,7 +6,9 @@ import com.tajinsurance.dto.RiskAjax;
 import com.tajinsurance.exceptions.EntityNotSavedException;
 import com.tajinsurance.exceptions.NoEntityException;
 import com.tajinsurance.utils.CodeUtils;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,12 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     PremiumService premiumService;
+
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
 
 
@@ -114,6 +122,18 @@ public class ContractServiceImpl implements ContractService {
         List<RiskAjax> ra = catContractService.getAllowedRisksForCatContract(contract.getCatContract());
         for(RiskAjax r : ra) if(r.riskId == risk.getId()) return true;
         return false;
+    }
+
+    @Override
+    public Date printContract(Contract c) {
+
+        if(c.getPrintDate() == null){
+            c.setPrintDate(new Date());
+        }
+
+        c.persist();
+
+        return c.getPrintDate();
     }
 
     private String prepareCode(Session session){
