@@ -6,7 +6,6 @@ import com.tajinsurance.dto.RiskAjax;
 import com.tajinsurance.exceptions.EntityNotSavedException;
 import com.tajinsurance.exceptions.NoEntityException;
 import com.tajinsurance.utils.CodeUtils;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -198,9 +197,14 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void delete(Long id) throws NoEntityException {
         Contract c = getContractById(id);
+
+
+
         if (c == null) throw new NoEntityException("не найден контракт с id = " + c.getId().toString());
 
-        c.remove();
+        //c.remove();
+        c.setDeleted(true);
+        c.persist();
     }
 
 

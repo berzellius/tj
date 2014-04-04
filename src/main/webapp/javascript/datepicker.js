@@ -4,7 +4,7 @@
 setTimeout(
     function(){
         $('div.date input[type=text]').datepicker({
-            dateFormat: 'yy-mm-dd'
+            dateFormat: 'dd.mm.yy'
         });
     },1000
 );

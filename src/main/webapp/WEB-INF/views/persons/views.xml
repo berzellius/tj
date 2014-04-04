@@ -4,4 +4,13 @@
     <definition extends="standalone" name="persons/create">
         <put-attribute name="body" value="/WEB-INF/views/persons/create.jspx"/>
     </definition>
+
+    <definition extends="standalone" name="ajax/persons/edit">
+        <put-attribute name="body" value="/WEB-INF/views/persons/edit.jspx" />
+    </definition>
+
+    <definition extends="default" name="persons/edit">
+        <put-attribute name="body" value="/WEB-INF/views/persons/edit.jspx" />
+    </definition>
+
 </tiles-definitions>

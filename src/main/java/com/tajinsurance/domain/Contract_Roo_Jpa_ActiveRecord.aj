@@ -53,11 +53,11 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
     }
     
     public static List<Contract> Contract.findContractEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Contract o", Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Contract o WHERE deleted=false", Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     public static List<Contract> Contract.findContractEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Contract o";
+        String jpaQuery = "SELECT o FROM Contract o WHERE deleted=false ";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {

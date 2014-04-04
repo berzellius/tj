@@ -130,11 +130,11 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             @Override
             public Date convert(String s) {
                 try {
-                    Date dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(s);
+                    Date dt = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").parse(s);
                     return dt;
                 } catch (ParseException e) {
                     try {
-                        Date dt = new SimpleDateFormat("yyyy-MM-dd").parse(s);
+                        Date dt = new SimpleDateFormat("dd.MM.yyyy").parse(s);
                         return dt;
                     } catch (ParseException e1) {
                         return null;

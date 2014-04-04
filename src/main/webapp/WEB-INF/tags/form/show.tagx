@@ -12,6 +12,7 @@
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
+  <jsp:directive.attribute name="title" type="java.lang.String" required="false" description="Title" />
 
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
@@ -37,7 +38,14 @@
     <spring:message var="typeName" code="menu_item_${fn:toLowerCase(fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1])}_new_label" htmlEscape="false" />
     <spring:message var="typeNamePlural" code="menu_item_${fn:toLowerCase(fn:split(id,'_')[fn:length(fn:split(id,'_')) - 1])}_list_label" htmlEscape="false" />
 
-    <spring:message arguments="${label}" code="entity_show" var="title_msg" htmlEscape="false" />
+    <c:if test="${empty title}">
+        <spring:message arguments="${label}" code="entity_show" var="title_msg" htmlEscape="false" />
+    </c:if>
+
+    <c:if test="${not empty title}">
+        <c:set var="title_msg" value="${title}" />
+    </c:if>
+
     <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
       <c:choose>
         <c:when test="${not empty object}">

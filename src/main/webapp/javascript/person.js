@@ -12,13 +12,23 @@
                         bindPersonActions(urlPrefix, ajaxMessages);
                         filters();
                         $('div.date input[type=text]').datepicker({
-                            dateFormat: 'yy-mm-dd'
+                            dateFormat: 'dd.mm.yy'
                         });
                     }
                 );
                 return false;
             }
         );
+
+        $("#personValue a").click(function(){
+            $.get(
+                this.href,
+                function (d){
+                    $.fancybox(d);
+                }
+            );
+            return false;
+        });
 
         var bindPersonActions = function(urlPrefix, ajaxMessages){
 

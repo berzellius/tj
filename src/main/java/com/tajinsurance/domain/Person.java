@@ -23,6 +23,10 @@ public class Person {
     public Person() {
     }
 
+    @Version
+    @Column(name = "version")
+    private Integer version;
+
     public Long getId() {
         return id;
     }
@@ -37,7 +41,7 @@ public class Person {
 
     private String middle;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date born;
 
     @Column(name = "doc_series")
@@ -46,7 +50,7 @@ public class Person {
     @Column(name = "doc_number")
     private String docNumber;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "doc_date")
     private Date docDate;
 
@@ -206,9 +210,17 @@ public class Person {
 
     @Override
     public String toString(){
-        SimpleDateFormat f = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         String s = this.getSurname() + " " + this.getName() + " " + this.getMiddle() + ", " + (this.getBorn() != null ? f.format(this.getBorn()) : "") + "; ";
         s += this.getDocSeries() + " № " + this.getDocNumber() + " " + this.getDocDepartment() + " / " + (this.getDocDate() != null?  f.format(this.getDocDate()) : "");
         return s;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

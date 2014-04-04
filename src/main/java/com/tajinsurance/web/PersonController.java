@@ -5,6 +5,7 @@ import com.tajinsurance.domain.Person;
 import com.tajinsurance.dto.PersonAjax;
 import com.tajinsurance.dto.PersonSaveAjaxAction;
 import com.tajinsurance.exceptions.EntityNotSavedException;
+import com.tajinsurance.exceptions.ResourceNotFoundException;
 import com.tajinsurance.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
@@ -69,4 +71,20 @@ public class PersonController {
         }
     }
 
+
+    @RequestMapping(value = "/edit", produces = "text/html")
+    public String editPersonForm(
+            @RequestParam(value = "id") Long id,
+            @RequestParam(value = "ajax", required = false) String ajax,
+            Model uiModel
+    ){
+
+        Person person = personService.getPersonById(id);
+
+        if(person == null) throw new ResourceNotFoundException("there is not Person with id="+id);
+
+        uiModel.addAttribute("person", person);
+
+        return (ajax == null)? "persons/edit" : "ajax/persons/edit";
+    }
 }

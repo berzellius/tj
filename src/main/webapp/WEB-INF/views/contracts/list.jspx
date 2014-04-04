@@ -4,8 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_tajinsurance_domain_Contract" items="${contracts}" z="Rhn09774FQAy+Rd/DynPN4yiww8=">
         <table:table data="${contracts}" id="l_com_tajinsurance_domain_Contract" path="/contracts" z="DilPuzbiIjYfmc/yGf02RyTxJgU=">
-            <table:column id="c_com_tajinsurance_domain_Contract_c_number" property="c_number" z="vZDJ53SZpSfodRNldjiLoTH+iss="/>
-            <table:column id="c_com_tajinsurance_domain_Contract_c_memo" property="c_memo" z="7GhcvtVwftC3A+Xsk4z+6aq37/c="/>
+            <table:column id="c_com_tajinsurance_domain_Contract_c_number" property="c_number" z="vZDJ53SZpSfodRNldjiLoTH+iss=" />
+            <!--table:column id="c_com_tajinsurance_domain_Contract_c_memo" property="c_memo" z="7GhcvtVwftC3A+Xsk4z+6aq37/c="/-->
+            <!--table:column id="c_com_tajinsurance_domain_Contract_catcontract" property="catContract" /-->
         </table:table>
     </page:list>
 </div>

@@ -50,7 +50,7 @@
         <div class="person_fields">
             <div class="date">
                 <label for="docDate"><spring:message code="label_com_tajinsurance_domain_person_doc_date" />:</label>
-                <input type="text" name="docDate" class="digits" />
+                <input type="text" name="docDate" />
                 <!--field:input id="c_com_tajinsurance_domain_Person_doc_date" field="docDate" /-->
             </div>
         </div>
@@ -74,7 +74,7 @@
 
         <div class="person_fields">
             <label for="indexRegistr"><spring:message code="label_com_tajinsurance_domain_person_index_registr" />:</label>
-            <input type="text" name="indexRegistr" />
+            <input type="text" name="indexRegistr" class="digits" />
         </div>
 
         <div class="person_fields">
@@ -86,7 +86,7 @@
 
         <div class="person_fields">
             <label for="indexResident"><spring:message code="label_com_tajinsurance_domain_person_index_resident" />:</label>
-            <input type="text" name="indexResident" />
+            <input type="text" name="indexResident" class="digits" />
         </div>
 
         <div class="person_fields">

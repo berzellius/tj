@@ -64,7 +64,10 @@
             <div>
                 <c:if test="${person_id eq 0}"><a href="" id="fill_person"><spring:message code="fill_in" /></a></c:if>
                 <c:if test="${person_id gt 0}"><a href="" id="fill_person"><spring:message code="change_in" /></a></c:if>
-            <p style="font-weight: bold" id="personValue"><a href="">${person}</a></p>
+            <spring:url value="/persons/edit"   var="person_link">
+                <spring:param name="id" value="${person_id}" />
+            </spring:url>
+            <p style="font-weight: bold" id="personValue"><a href="${person_link}">${person}</a></p>
             <p><input type="hidden" name="person" value="${person_id}" /></p></div>
         </div>
 

@@ -27,6 +27,8 @@ public class Contract {
      */
     private String c_memo;
 
+    private boolean deleted;
+
     @Version
     @Column(name = "version")
     private Integer version;
@@ -43,23 +45,23 @@ public class Contract {
     @OneToOne
     private Partner partner;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "print_date")
     private Date printDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "app_date")
     private Date appDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "pay_date")
     private Date payDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "start_date")
     private Date startDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "end_date")
     private Date endDate;
 
@@ -86,5 +88,13 @@ public class Contract {
 
     public void setContractPremiums(List<ContractPremium> contractPremiums) {
         this.contractPremiums = contractPremiums;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

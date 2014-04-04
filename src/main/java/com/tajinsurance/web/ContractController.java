@@ -115,6 +115,9 @@ public class ContractController {
         } catch (NoEntityException e) {
             uiModel.addAttribute("error", e.getMessage());
         }
+
+        if(print != null) return "contracts/print";
+
         return "contracts/show";
     }
 

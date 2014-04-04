@@ -127,34 +127,14 @@ public final class list_jspx extends org.apache.jasper.runtime.HttpJspBase
     org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_table_005fcolumn_005f0);
     _jspx_th_table_005fcolumn_005f0.setJspContext(_jspx_page_context);
     _jspx_th_table_005fcolumn_005f0.setParent(_jspx_parent);
-    // /WEB-INF/views/contracts/list.jspx(7,130) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/contracts/list.jspx(7,131) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_table_005fcolumn_005f0.setZ("vZDJ53SZpSfodRNldjiLoTH+iss=");
-    // /WEB-INF/views/contracts/list.jspx(7,130) name = property type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/contracts/list.jspx(7,131) name = property type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_table_005fcolumn_005f0.setProperty("c_number");
-    // /WEB-INF/views/contracts/list.jspx(7,130) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
+    // /WEB-INF/views/contracts/list.jspx(7,131) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
     _jspx_th_table_005fcolumn_005f0.setId("c_com_tajinsurance_domain_Contract_c_number");
     _jspx_th_table_005fcolumn_005f0.doTag();
     org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_table_005fcolumn_005f0);
-    return false;
-  }
-
-  private boolean _jspx_meth_table_005fcolumn_005f1(javax.servlet.jsp.tagext.JspTag _jspx_parent, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  table:column
-    org.apache.jsp.tag.web.form.fields.column_tagx _jspx_th_table_005fcolumn_005f1 = new org.apache.jsp.tag.web.form.fields.column_tagx();
-    org.apache.jasper.runtime.AnnotationHelper.postConstruct(_jsp_annotationprocessor, _jspx_th_table_005fcolumn_005f1);
-    _jspx_th_table_005fcolumn_005f1.setJspContext(_jspx_page_context);
-    _jspx_th_table_005fcolumn_005f1.setParent(_jspx_parent);
-    // /WEB-INF/views/contracts/list.jspx(8,126) name = z type = java.lang.String reqTime = true required = false fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
-    _jspx_th_table_005fcolumn_005f1.setZ("7GhcvtVwftC3A+Xsk4z+6aq37/c=");
-    // /WEB-INF/views/contracts/list.jspx(8,126) name = property type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
-    _jspx_th_table_005fcolumn_005f1.setProperty("c_memo");
-    // /WEB-INF/views/contracts/list.jspx(8,126) name = id type = java.lang.String reqTime = true required = true fragment = false deferredValue = false expectedTypeName = java.lang.String deferredMethod = false methodSignature = null
-    _jspx_th_table_005fcolumn_005f1.setId("c_com_tajinsurance_domain_Contract_c_memo");
-    _jspx_th_table_005fcolumn_005f1.doTag();
-    org.apache.jasper.runtime.AnnotationHelper.preDestroy(_jsp_annotationprocessor, _jspx_th_table_005fcolumn_005f1);
     return false;
   }
 
@@ -180,8 +160,6 @@ public final class list_jspx extends org.apache.jasper.runtime.HttpJspBase
       throws Throwable
     {
       if (_jspx_meth_table_005fcolumn_005f0(_jspx_parent, _jspx_page_context))
-        return true;
-      if (_jspx_meth_table_005fcolumn_005f1(_jspx_parent, _jspx_page_context))
         return true;
       return false;
     }

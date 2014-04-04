@@ -41,6 +41,7 @@ C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonSaveAjaxActio
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\RiskAjax.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\exceptions\EntityNotSavedException.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\exceptions\NoEntityException.java
+C:\projects\tadjinsurance\src\main\java\com\tajinsurance\exceptions\ResourceNotFoundException.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\service\CatContractService.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\service\CatContractServiceImpl.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\service\CatContractStatusService.java

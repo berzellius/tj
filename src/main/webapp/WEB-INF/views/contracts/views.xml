@@ -16,4 +16,8 @@
 <definition extends="default" name="contracts/select_category">
     <put-attribute name="body" value="/WEB-INF/views/contracts/select_category.jspx" />
 </definition>
+
+<definition extends="default" name="contracts/print">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/print.jspx" />
+</definition>
 </tiles-definitions>
