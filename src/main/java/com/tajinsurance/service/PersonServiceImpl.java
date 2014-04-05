@@ -6,11 +6,11 @@ import com.tajinsurance.exceptions.EntityNotSavedException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +20,11 @@ import java.util.List;
 @Service
 @Transactional
 public class PersonServiceImpl implements PersonService {
-    @Autowired
+
+    @PersistenceContext
     EntityManager entityManager;
+
+
 
     @Override
     public List<Person> getAllPersons() {
@@ -42,14 +45,14 @@ public class PersonServiceImpl implements PersonService {
         Session session = entityManager.unwrap(Session.class);
         Criteria pc = session.createCriteria(Person.class);
 
-        if(person.getSurname() != null) pc.add(Restrictions.like("surname", person.getSurname()+"%").ignoreCase());
-        if(person.getName() != null) pc.add(Restrictions.like("name", person.getName()+"%").ignoreCase());
-        if(person.getMiddle() != null) pc.add(Restrictions.like("middle", person.getMiddle()+"%").ignoreCase());
+        if (person.getSurname() != null) pc.add(Restrictions.like("surname", person.getSurname() + "%").ignoreCase());
+        if (person.getName() != null) pc.add(Restrictions.like("name", person.getName() + "%").ignoreCase());
+        if (person.getMiddle() != null) pc.add(Restrictions.like("middle", person.getMiddle() + "%").ignoreCase());
 
-        List<Person> ps =  pc.list();
+        List<Person> ps = pc.list();
         List<PersonAjax> res = new ArrayList<PersonAjax>();
 
-        for(Person p : ps){
+        for (Person p : ps) {
             res.add(personToAjax(p));
         }
 
@@ -59,18 +62,41 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonAjax createNewPerson(Person person) throws EntityNotSavedException {
         List<PersonAjax> ps = searchPersonsByPerson(person);
-        if(ps.size() == 0){
+        if (ps.size() == 0) {
             Session session = entityManager.unwrap(Session.class);
             session.save(person);
             session.flush();
             session.refresh(person);
-            if(person.getId() == null) throw new EntityNotSavedException("не удалось создать объект " + person.toString());
+            if (person.getId() == null)
+                throw new EntityNotSavedException("не удалось создать объект " + person.toString());
             return personToAjax(person);
-        }
-        else return personToAjax(getPersonById(ps.get(0).id));
+        } else return personToAjax(getPersonById(ps.get(0).id));
     }
 
-    private PersonAjax personToAjax(Person p){
+    @Override
+    public Person edit(Person person) {
+
+
+
+        try {
+            entityManager.merge(person);
+            entityManager.flush();
+
+            return entityManager.find(Person.class, person.getId());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return person;
+
+    }
+
+    private Person transform(Person p) {
+
+
+        return p;
+    }
+
+    private PersonAjax personToAjax(Person p) {
         return new PersonAjax(p.getId(), p.toString());
     }
 }

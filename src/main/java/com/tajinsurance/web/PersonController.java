@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.tajinsurance.domain.Person;
 import com.tajinsurance.dto.PersonAjax;
 import com.tajinsurance.dto.PersonSaveAjaxAction;
+import com.tajinsurance.dto.PersonUpdateAjaxAction;
 import com.tajinsurance.exceptions.EntityNotSavedException;
 import com.tajinsurance.exceptions.ResourceNotFoundException;
 import com.tajinsurance.service.PersonService;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
@@ -86,5 +84,38 @@ public class PersonController {
         uiModel.addAttribute("person", person);
 
         return (ajax == null)? "persons/edit" : "ajax/persons/edit";
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    @ResponseBody() public byte[] editPerson(Model uiModel, Person person){
+
+        Gson gson = new Gson();
+        PersonUpdateAjaxAction pua = new PersonUpdateAjaxAction();
+
+        try{
+            Person p = personService.edit(person);
+            pua.success = true;
+            pua.person = p;
+            pua.personAjax = new PersonAjax(p.getId(), p.toString());
+        }
+        finally {
+            String res = gson.toJson(pua);
+            try {
+                return res.getBytes("UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                return res.getBytes(); // нет utf-8;
+            }
+        }
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "text/html", value = "/{id}")
+    @ResponseBody() public byte[] editPersonPut(
+            Model uiModel, Person person,
+                @PathVariable(value = "id") Long id
+            ){
+        person.setId(id);
+
+        return editPerson(uiModel, person);
     }
 }

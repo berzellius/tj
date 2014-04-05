@@ -19,4 +19,6 @@ public interface PersonService {
     public List<PersonAjax> searchPersonsByPerson(Person person);
 
     public PersonAjax createNewPerson(Person person)  throws EntityNotSavedException;
+
+    public Person edit(Person person);
 }

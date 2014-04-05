@@ -46,6 +46,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getIdToPersonConverter());
         registry.addConverter(getStringToPersonConverter());
         registry.addConverter(getStringToDateConverter());
+        registry.addConverter(getDateToStringConverter());
 		// Register application converters and formatters
 	}
 
@@ -140,6 +141,15 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
                         return null;
                     }
                 }
+            }
+        };
+    }
+
+    public Converter<Date,String> getDateToStringConverter(){
+        return new Converter<Date, String>() {
+            @Override
+            public String convert(Date date) {
+                return  new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(date);
             }
         };
     }

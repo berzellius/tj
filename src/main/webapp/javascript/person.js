@@ -25,10 +25,53 @@
                 this.href,
                 function (d){
                     $.fancybox(d);
+                    filters();
+                    $('div.date input[type=text]').datepicker({
+                        dateFormat: 'dd.mm.yy'
+                    });
+                    bindPersonEditFormActions(urlPrefix, ajaxMessages);
                 }
             );
             return false;
         });
+
+
+        var bindPersonEditFormActions = function(urlPrefix, ajaxMessages){
+            var urlPrefix = urlPrefix;
+            var ajaxMessages = ajaxMessages;
+
+
+
+            $("form#person").submit(function(){
+
+                var formData = {};
+                $("form#person input[type=text]").each(function(){
+                    if(this.name) formData[this.name] = this.value;
+                });
+
+
+                $.post(
+                    urlPrefix + "persons/" + $("form#person input[name=id]").val(),
+                    formData,
+                    function(d){
+
+
+                        var res = JSON.parse(d);
+
+                        if(res.success){
+                            $("#personValue a").html("<a href='" + urlPrefix + "/persons/edit?id=" + res.id + "&ajax=1' >" + res.personAjax.info + "</a>");
+                            $.fancybox.close();
+                        }
+                        else{
+                            $("div#editPerson").html("<p style='color: red'> error: <br />" + res.message + "</p>");
+                        }
+                    }
+                );
+
+                return false;
+            });
+
+        };
 
         var bindPersonActions = function(urlPrefix, ajaxMessages){
 

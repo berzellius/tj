@@ -23,7 +23,7 @@ public class Person {
     public Person() {
     }
 
-    @Version
+    /*@Version*/
     @Column(name = "version")
     private Integer version;
 
@@ -41,7 +41,7 @@ public class Person {
 
     private String middle;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private Date born;
 
     @Column(name = "doc_series")
@@ -50,7 +50,7 @@ public class Person {
     @Column(name = "doc_number")
     private String docNumber;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @Column(name = "doc_date")
     private Date docDate;
 

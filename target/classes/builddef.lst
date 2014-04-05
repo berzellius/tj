@@ -38,6 +38,7 @@ C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\ContractPrintAjax.j
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\DeletePremuimAjaxAction.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonAjax.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonSaveAjaxAction.java
+C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\PersonUpdateAjaxAction.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\dto\RiskAjax.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\exceptions\EntityNotSavedException.java
 C:\projects\tadjinsurance\src\main\java\com\tajinsurance\exceptions\NoEntityException.java

@@ -16,21 +16,7 @@
     <spring:message code="label_contract_edit_title" var="title" />
     <form:update title="${title}" id="fc_com_tajinsurance_domain_Contract" modelAttribute="contract" path="/contracts" versionField="Version" render="${empty dependencies}" z="7EEwS+c71NSUcR0jBKiFHFsc/hw=">
 
-        <spring:message code="label_contract_save" var="save" />
-        <spring:message code="label_contract_print" var="print" />
-        <spring:message code="label_contract_close" var="close" />
 
-        <div>
-            <ul id="contract_main">
-                <li><input type="button" id="contractSave" value="${save}" /></li>
-
-                <c:if test="${printable}">
-                    <li><input type="button" id="contractPrint" value="${print}" /></li>
-                </c:if>
-                <li><input type="button" id="contractClose" value="${close}" /></li>
-            </ul>
-            <div class="clearboth"></div>
-        </div>
 
         <label for="c_number"><spring:message code="label_com_tajinsurance_domain_contract_c_number" />:</label>
         <div class="field">
@@ -55,6 +41,10 @@
 
         <div class="date">
         <field:input id="c_com_tajinsurance_domain_Contract_start_date" field="startDate" classHTML="datepick" />
+            <field:input id="c_com_tajinsurance_domain_Contract_print_date" field="printDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_app_date" field="appDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_pay_date" field="payDate" />
+            <field:input id="c_com_tajinsurance_domain_Contract_end_date" field="endDate" />
         </div>
 
 
@@ -66,6 +56,7 @@
                 <c:if test="${person_id gt 0}"><a href="" id="fill_person"><spring:message code="change_in" /></a></c:if>
             <spring:url value="/persons/edit"   var="person_link">
                 <spring:param name="id" value="${person_id}" />
+                <spring:param name="ajax" value="1" />
             </spring:url>
             <p style="font-weight: bold" id="personValue"><a href="${person_link}">${person}</a></p>
             <p><input type="hidden" name="person" value="${person_id}" /></p></div>
@@ -76,10 +67,8 @@
             <field:select id="c_com_tajinsurance_domain_Contract_CatContract" field="catContract" path="/catcontracts" items="${catContracts}" itemValue="id" />
             <field:select id="c_com_tajinsurance_domain_Contract_CatContractStatus" field="catContractStatus" path="/catcontractstatuses" items="${catContractStatuses}" itemValue="id" />
             <field:select id="c_com_tajinsurance_domain_Contract_partner" field="partner" path="/partners" items="${partners}" itemValue="id" />
-            <field:input id="c_com_tajinsurance_domain_Contract_print_date" field="printDate" />
-            <field:input id="c_com_tajinsurance_domain_Contract_app_date" field="appDate" />
-            <field:input id="c_com_tajinsurance_domain_Contract_pay_date" field="payDate" />
-            <field:input id="c_com_tajinsurance_domain_Contract_end_date" field="endDate" />
+
+
             <field:select id="c_com_tajinsurance_domain_Contract_partner" field="partner" path="/partners" items="${partners}" itemValue="id" />
         </div>
         <field:input id="c_com_tajinsurance_domain_Contract_length" validationRegex="[0-9]+" field="length" />
@@ -139,6 +128,29 @@
                 </c:if>
             </table>
         </div>
+
+
+        <spring:message code="label_contract_save" var="save" />
+        <spring:message code="label_contract_print" var="print" />
+        <spring:message code="label_contract_close" var="close" />
+
+        <div>
+            <ul id="contract_main">
+                <li><input type="button" id="contractSave" value="${save}" /></li>
+
+                <c:if test="${printable}">
+                    <li><input type="button" id="contractPrint" value="${print}" /></li>
+                </c:if>
+                <li><input type="button" id="contractClose" value="${close}" /></li>
+            </ul>
+            <div class="clearboth"></div>
+        </div>
+
+        <style>
+            form#contract input[type=submit]#proceed{
+                display: none;
+            }
+        </style>
 
 
 
