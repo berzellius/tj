@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="personAjaxForm" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
-<div id="createNewPerson">
-    <!--a href="" class="button" id="newPerson"--><spring:message code="person_create_new_button" /><!--/a-->
-</div>
-<div id="foundPeople">
-    <p><spring:message code="person_results" />:</p>
-</div>
-<form:create id="fc_com_tajinsurance_domain_Person" modelAttribute="person" path="/persons">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <form:create submit="false" id="fc_com_tajinsurance_domain_Person" modelAttribute="person" path="/persons?new"> <!--saveButtonValue="${saveBtn}"-->
 
     <div class="inputs_block">
 
@@ -26,6 +20,18 @@
             <input type="text" name="born" />
             <!--field:input id="c_com_tajinsurance_domain_Person_born" field="born" /-->
         </div></div>
+
+        <div class="person_fields">
+            <label for="sex"><spring:message code="label_sex" />:</label>
+            <div style="float:left">
+                <label><spring:message code="label_sex_male" /></label>
+                <input type="radio" name="sex" checked="checked" value="MALE" />
+            </div>
+            <div style="float:left">
+                <label><spring:message code="label_sex_female" /></label>
+                <input type="radio" name="sex" value="FEMALE" />
+            </div>
+        </div>
 
         <div class="clearboth"></div>
 
@@ -71,6 +77,11 @@
         <field:input id="c_com_tajinsurance_domain_Person_index_resident" field="indexResident" />
         <field:input id="c_com_tajinsurance_domain_Person_addr_resident" field="addrResident" /-->
 
+        <div class="person_fields">
+            <label for="city"><spring:message code="label_com_tajinsurance_domain_person_city" />:</label>
+            <input type="text" name="city"  />
+        </div>
+
 
         <div class="person_fields">
             <label for="indexRegistr"><spring:message code="label_com_tajinsurance_domain_person_index_registr" />:</label>
@@ -83,6 +94,11 @@
         </div>
 
         <div class="clearboth"></div>
+
+        <div class="person_fields">
+            <label for="cityResident"><spring:message code="label_com_tajinsurance_domain_person_city_resident" />:</label>
+            <input type="text" name="cityResident" />
+        </div>
 
         <div class="person_fields">
             <label for="indexResident"><spring:message code="label_com_tajinsurance_domain_person_index_resident" />:</label>
@@ -107,19 +123,19 @@
 
         <div class="person_fields">
             <label for="phoneHome"><spring:message code="label_com_tajinsurance_domain_person_phone_home" />:</label>
-            <input type="text" name="phoneHome" />
+            <input class="digits" type="text" name="phoneHome" />
         </div>
 
         <div class="person_fields">
             <label for="phoneMob"><spring:message code="label_com_tajinsurance_domain_person_phone_mob" />:</label>
-            <input type="text" name="phoneMob" />
+            <input class="digits" type="text" name="phoneMob" />
         </div>
 
         <div class="clearboth"></div>
 
         <div class="person_fields">
             <label for="phoneWork"><spring:message code="label_com_tajinsurance_domain_person_phone_work" />:</label>
-            <input type="text" name="phoneWork" />
+            <input class="digits" type="text" name="phoneWork" />
         </div>
 
         <div class="person_fields">
@@ -130,14 +146,6 @@
         <div class="clearboth"></div>
 
     </div>
-
-
-
-
-    <spring:message code="label_check_person_exists" var="p_ex_chk" />
-    <input type="button" id="check_btn" value="${p_ex_chk}" style="float:left; height: 24px" />
-
-
     <!--field:input id="c_com_tajinsurance_domain_Person_email" field="email"  /-->
     <!--field:input id="c_com_tajinsurance_domain_Person_surname" field="surname" />
     <field:input id="c_com_tajinsurance_domain_Person_name" field="name" />

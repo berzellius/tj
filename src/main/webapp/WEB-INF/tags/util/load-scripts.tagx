@@ -15,16 +15,21 @@
         var urlPrefix = "${prefix}";
     </script>
     <script src="${prefix}/javascript/jquery-1.11.0.min.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/jquery-validate.min.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/fancybox/jquery.fancybox.pack.js" type="text/javascript"><jsp:text></jsp:text></script>
-    <script src="${prefix}/javascript/ui/jquery-ui-1.10.4.custom.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/ui/jquery-ui-1.11.2.custom.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/person.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/premium.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/contract_lifecycle.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/partner_edit.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/datepicker.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/regex.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/pwdgen.js" type="text/javascript"><jsp:text></jsp:text></script>
     <script src="${prefix}/javascript/onload.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/insurance_areas.js" type="text/javascript"><jsp:text></jsp:text></script>
+    <script src="${prefix}/javascript/images.js" type="text/javascript"><jsp:text></jsp:text></script>
     <link href="${prefix}/javascript/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
-    <link href="${prefix}/javascript/ui/jquery-ui-1.10.4.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="${prefix}/javascript/ui/jquery-ui-1.11.2.custom.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="${tundra_url}"/>
     <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}"/>
     <link rel="stylesheet" type="text/css" media="print" href="${prefix}/styles/print.css" />

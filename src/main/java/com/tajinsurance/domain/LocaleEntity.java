@@ -2,6 +2,7 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Created by berz on 04.03.14.
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "entity", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "LocaleEntity")
-public abstract class LocaleEntity {
+public abstract class LocaleEntity implements Serializable {
 
     protected LocaleEntity(){
 

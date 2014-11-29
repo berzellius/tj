@@ -13,6 +13,12 @@ var premiumCalculate = (function (pref) {
             request.risk = $('#risk_allowed').val();
             request.sum = $('#risk_sum').val();
             request.contract = $('#contractIdField').val();
+            request.length = $('#_length_id').val();
+
+            if(request.length == 0){
+                $('#_length_id').focus();return false;
+            }
+
             $("#buttonCalcRisk").attr("disabled", true);
             $.post(
                 urlPrefix + "risk?calc",

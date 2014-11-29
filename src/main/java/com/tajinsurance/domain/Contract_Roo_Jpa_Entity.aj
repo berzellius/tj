@@ -8,19 +8,7 @@ privileged aspect Contract_Roo_Jpa_Entity {
     
     declare @type: Contract: @Entity;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "contract_id_generator")
-    @SequenceGenerator(name = "contract_id_generator", sequenceName = "contract_id_seq")
-    @Column(name = "id")
-    private Long Contract.id;
-    
-    public Long Contract.getId() {
-        return this.id;
-    }
-    
-    public void Contract.setId(Long id) {
-        this.id = id;
-    }
+
 
     
 }

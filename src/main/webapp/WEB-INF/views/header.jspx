@@ -3,4 +3,10 @@
   <jsp:output omit-xml-declaration="yes" />
 
   <spring:message code="button_home" var="home_label" htmlEscape="false" />
+    <c:if test="${pageContext['request'].userPrincipal != null}">
+        <div class="login_user_info">
+            ${pageContext['request'].userPrincipal.principal.fio} [${pageContext['request'].userPrincipal.principal.partner}]
+        </div>
+        <div class="clearboth"></div>
+    </c:if>
 </div> 

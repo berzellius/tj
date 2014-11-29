@@ -11,14 +11,21 @@ body {
 	text-align: center;
 }
 
+#logo_main{
+    width: 200px;
+    float: left;
+    margin-right: 50px;
+    margin-top: -10px;
+}
+
 #header {
 	margin-bottom: 1em;
 }
 
 #wrapper {
-	width:800px;
+	width:1350px;
 	min-width: 800px;
-	max-width: 800px;
+	//max-width: 800px;
 	margin-right: auto;
 	margin-left: auto;
 
@@ -256,6 +263,10 @@ ul li {
 }
 /* table elements */
 
+table.noborder{
+    border: none;
+}
+
 table {
 	background: #EEEEEE;
 	margin: 2px 0 0 0;
@@ -415,6 +426,7 @@ div#personAjaxForm{
 }
 
 .halfwide{width: 50%}
+.three_fourth_wide{width:75%}
 .center{margin: 0 auto}
 
 div.fields_in_line{
@@ -448,3 +460,57 @@ ul#contract_main li{
 ul#contract_main li input[type=button]{
     min-width:100px
 }
+
+div#filter{
+}
+
+div.login_user_info{
+    float: right;
+    font-weight: bold;
+    margin: 5px;
+}
+
+div#personAjaxForm a, a.dashed, p#personValue a, div#ins_areas a{
+    text-decoration: none;
+    border-bottom: 1px dashed;
+}
+
+div#contractPrintContainer{
+    width: 170px;
+}
+
+ul#images{
+    list-style: none;
+}
+
+ul#images li{
+    width: 150px;
+    height: 150px;
+    float: left;
+    border: 1px solid #aaa;
+    margin-right: 10px;
+}
+
+ul#images li:last-child{
+    margin: 0;
+}
+
+ul#images li img{
+    width: 90%;
+    max-height: 130px;
+    overflow: hidden;
+    margin: 5px;
+}
+
+ul#images li div.menu{
+    position: relative;
+    bottom: 0;
+}
+
+ul#images li div.description p{
+    margin: 0;
+    min-height: 1em;
+}
+
+
+

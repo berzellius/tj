@@ -11,7 +11,15 @@
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
   <jsp:directive.attribute name="sort" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the column can be used to sort/order list (default 'false')" />
-  
+  <jsp:directive.attribute name="bool" type="java.lang.Boolean" required="false" />
+  <jsp:directive.attribute name="boolValue" type="java.lang.Boolean" required="false" description="Print just true or false" />
+  <jsp:directive.attribute name="listValue" type="java.lang.Boolean" required="false" description="It is list value?" />
+  <jsp:directive.attribute name="datePeriod" type="java.lang.Boolean" required="false" description="Date period" />
+  <jsp:directive.attribute name="orderField" type="java.lang.String" required="false" description="Order by field" />
+  <jsp:directive.attribute name="visibleField" type="java.lang.String" required="false" description="show specific field of object" />
+  <jsp:directive.attribute name="size" type="java.lang.String" required="false" description="size of search field" />
+
+
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
@@ -20,8 +28,89 @@
     <c:if test="${empty dateTimePattern}">
       <c:set value="MM/dd/yyyy" var="dateTimePattern" />
     </c:if>
+
+    <c:if test="${empty boolValue}">
+        <c:set value="false" var="boolValue" />
+    </c:if>
+
+    <c:if test="${empty datePeriod}">
+        <c:set value="false" var="datePeriod" />
+    </c:if>
+
+    <c:if test="${empty listValue}">
+        <c:set value="false" var="listValue" />
+    </c:if>
+
+    <c:if test="${empty size}">
+        <c:set value="auto" var="size" />
+    </c:if>
+
+
+    <c:choose>
+      <c:when test="${empty columnBoolValues}">
+        <c:set value="${boolValue}" var="columnBoolValues" scope="request" />
+      </c:when>
+      <c:otherwise>
+        <c:set var="columnBoolValues" value="${columnBoolValues}&#9999;${boolValue}" scope="request" />
+      </c:otherwise>
+    </c:choose>
+
+
+    <c:if test="${empty orderField}"><c:set value="null" var="orderField" /></c:if>
+    <c:choose>
+        <c:when test="${empty orderColumns}">
+            <c:set value="${orderField}" var="orderColumns" scope="request" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="orderColumns" value="${orderColumns}&#9999;${orderField}" scope="request" />
+        </c:otherwise>
+    </c:choose>
+
+    <c:if test="${empty visibleField}"><c:set value="null" var="visibleField" /></c:if>
+    <c:choose>
+        <c:when test="${empty visibleFields}">
+            <c:set value="${visibleField}" var="visibleFields" scope="request" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="visibleFields" value="${visibleFields}&#9999;${visibleField}" scope="request" />
+        </c:otherwise>
+    </c:choose>
+
+   <c:choose>
+       <c:when test="${empty sizes}">
+           <c:set value="${size}" var="sizes" scope="request" />
+       </c:when>
+       <c:otherwise>
+           <c:set value="${sizes}&#9999;${size}" var="sizes" scope="request" />
+       </c:otherwise>
+   </c:choose>
+
+   <c:choose>
+       <c:when test="${empty columnDatePeriods}">
+           <c:set value="${datePeriod}" var="columnDatePeriods" scope="request" />
+       </c:when>
+       <c:otherwise>
+           <c:set value="${columnDatePeriods}&#9999;${datePeriod}" var="columnDatePeriods" scope="request" />
+       </c:otherwise>
+   </c:choose>
+
+    <c:choose>
+        <c:when test="${empty columnListValues}">
+            <c:set value="${listValue}" var="columnListValues" scope="request" />
+        </c:when>
+        <c:otherwise>
+            <c:set var="columnListValues" value="${columnListValues}&#9999;${listValue}" scope="request" />
+        </c:otherwise>
+    </c:choose>
+
       
     <c:choose>
+      <c:when test="${bool and empty columnTypes}">
+          <c:set var="columnTypes" value="bool" scope="request" />
+      </c:when>
+      <c:when test="${bool and not empty columnTypes}">
+          <c:set var="columnTypes" value="${columnTypes}&#9999;bool" scope="request" />
+      </c:when>
       <c:when test="${date and empty columnTypes}">
         <c:set var="columnTypes" value="date" scope="request" />
         <c:set var="columnDatePatterns" value="${dateTimePattern}" scope="request" />

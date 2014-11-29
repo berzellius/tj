@@ -1,18 +1,18 @@
 package com.tajinsurance.domain;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by berz on 26.03.14.
  */
 @Entity
-@Table(name="users")
-public class User implements UserDetails {
+@Table(name = "users")
+public class User implements UserDetails,Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_id_generator")
@@ -25,6 +25,12 @@ public class User implements UserDetails {
     private String username;
 
     private String password;
+
+    private String fio;
+
+    private String memo;
+
+    private String email;
 
     private boolean locked;
 
@@ -47,13 +53,13 @@ public class User implements UserDetails {
                     @JoinColumn(name = "auth_id")
             }
     )
-    private Collection<UserRole> authorities;
+    private List<UserRole> authorities;
 
     public User() {
     }
 
-    public User(boolean allEnabled){
-        if(!allEnabled) return;
+    public User(boolean allEnabled) {
+        if (!allEnabled) return;
         setExpired(false);
         setCredentialsExpired(false);
         setLocked(false);
@@ -62,7 +68,7 @@ public class User implements UserDetails {
 
 
     @Override
-    public Collection<UserRole> getAuthorities() {
+    public List<UserRole> getAuthorities() {
         return this.authorities;
     }
 
@@ -78,30 +84,42 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return !this.expired;
+        return !isExpired();
     }
 
-    public void setExpired(boolean e){
+    public boolean isExpired() {
+        return this.expired;
+    }
+
+    public void setExpired(boolean e) {
         this.expired = e;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !this.locked;
+        return !isLocked();
     }
 
-    public void setLocked(boolean l){
+    public void setLocked(boolean l) {
         this.locked = l;
     }
 
-    public boolean enabled;
+    public boolean isLocked() {
+        return this.locked;
+    }
+
+    private boolean enabled;
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return !this.credentialsExpired;
+        return !isCredentialsExpired();
     }
 
-    public void setCredentialsExpired(boolean ce){
+    public boolean isCredentialsExpired() {
+        return this.credentialsExpired;
+    }
+
+    public void setCredentialsExpired(boolean ce) {
         this.credentialsExpired = ce;
     }
 
@@ -110,7 +128,7 @@ public class User implements UserDetails {
         return this.enabled;
     }
 
-    public void setEnabled(boolean e){
+    public void setEnabled(boolean e) {
         this.enabled = e;
     }
 
@@ -128,5 +146,65 @@ public class User implements UserDetails {
 
     public void setPartner(Partner partner) {
         this.partner = partner;
+    }
+
+    public void setAuthorities(List<UserRole> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /*@Version*/
+    @Column(name = "version")
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof User && getId().equals(((User) obj).getId());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

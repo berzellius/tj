@@ -48,6 +48,13 @@ public class CatContractLocaleEntity extends LocaleEntity {
     }
 
     @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
     public String toString(){
         return getName() + " - " + getValue();
     }

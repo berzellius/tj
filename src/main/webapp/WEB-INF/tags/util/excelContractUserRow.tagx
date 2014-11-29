@@ -1,0 +1,187 @@
+<jsp:root
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:spring="http://www.springframework.org/tags"
+        xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+        xmlns:jsp="http://java.sun.com/JSP/Page"
+        xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+        xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+        version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <jsp:directive.attribute name="contract" type="com.tajinsurance.domain.Contract" required="true"
+                             description="Contract"/>
+    <jsp:directive.attribute name="contract_premium" type="com.tajinsurance.domain.ContractPremium" required="false"
+                             description="contract premium in row"/>
+    <jsp:directive.attribute name="contract_premiums" type="java.util.List" required="false"
+                             description="many premiums in one row"/>
+
+    <ss:Row>
+        <c:set var="j" value="0"/>
+
+        <ss:Cell>
+            <ss:Data xsd="integer" ss:Type="Number">${contract.c_number}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <fmt:formatDate value="${contract.startDate}" pattern="dd.MM.yyyy" var="startDate"/>
+            <ss:Data ss:Type="String">${startDate}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <fmt:formatDate value="${contract.endDate}" pattern="dd.MM.yyyy" var="endDate"/>
+            <ss:Data ss:Type="String">${endDate}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <fmt:formatDate value="${contract.appDate}" pattern="dd.MM.yyyy" var="appDate"/>
+            <ss:Data ss:Type="String">${appDate}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <fmt:formatDate value="${contract.payDate}" pattern="dd.MM.yyyy" var="payDate"/>
+            <ss:Data ss:Type="String">${payDate}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">
+                <c:if test="${not empty contract_premium}">
+                    <c:out value="${contract_premium.risk}"/>
+                </c:if>
+                <c:if test="${not empty contract_premiums}">
+                    <c:forEach items="${contract_premiums}" var="pr" varStatus="loop">
+                        <c:if test="${pr.deleted != true}">
+
+                            <c:if test="${!loop.first}">
+
+                                <c:if test="${empty mcomma or mcomma eq 0}">
+                                    <c:out value=", "/>
+                                </c:if>
+
+                                <c:if test="${not empty mcomma and mcomma eq 1}">
+                                    <c:set var="mcomma" value="0"/>
+                                </c:if>
+                            </c:if>
+
+
+
+                            <c:out value="${pr.risk}"/>
+                        </c:if>
+                        <c:if test="${pr.deleted == true and loop.first}">
+                            <c:set var="mcomma" value="1" />
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+            </ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data xsd="integer" ss:Type="Number">
+                <c:if test="${not empty contract_premium and contract_premium.deleted != true}">
+                    <c:out value="${contract_premium.insuredSum}"/>
+                </c:if>
+                <c:if test="${not empty contract_premiums}">
+                    <c:choose>
+                        <c:when test="${contract.catContract.product eq 'MP0'}">
+                            <c:set var="ins" value="0" />
+                            <c:forEach items="${contract_premiums}" var="pr" varStatus="loop">
+                                <c:if test="${pr.deleted != true}"> <c:set var="ins" value="${ins + pr.insuredSum}" /> </c:if>
+                            </c:forEach>
+                            <c:out value="${ins}" />
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${contract_premiums}" var="pr" varStatus="loop">
+                                <c:if test="${empty stopIS and pr.deleted != true}">
+                                    <c:set var="stopIS" value="true" />
+                                    <c:out value="${pr.insuredSum}" />
+                                </c:if>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+
+                </c:if>
+            </ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data xsd="integer" ss:Type="Number">
+                <c:if test="${not empty contract_premium}">
+                    <fmt:formatNumber var="premium"
+                                      value="${contract_premium.premium}"
+                                      maxFractionDigits="0" groupingUsed="false"/>
+                    <c:out value="${premium}"/>
+                </c:if>
+                <c:if test="${not empty contract_premiums}">
+                    <c:set var="premium" value="0"/>
+                    <c:forEach items="${contract_premiums}" var="pr" varStatus="loop">
+                        <c:if test="${pr.deleted != true}"><c:set var="premium" value="${premium + pr.premium}"/></c:if>
+                    </c:forEach>
+                    <fmt:formatNumber var="premium"
+                                      value="${premium}"
+                                      maxFractionDigits="0" groupingUsed="false"/>
+                    <c:out value="${premium}"/>
+                </c:if>
+            </ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">
+                <c:if test="${not empty contract_premium and contract_premium.deleted != true}">
+                    <c:if test="${not empty contract_premium.insuranceObject}">
+                        <c:out value="${contract_premium.insuranceObject.insuranceArea.address}"/>
+                    </c:if>
+                </c:if>
+                <c:if test="${not empty contract_premiums}">
+                    <c:forEach items="${contract_premiums}" var="pr" varStatus="loop">
+                        <c:if test="${not empty pr.insuranceObject}">
+                            <c:if test="${pr.deleted != true}">
+
+
+                                <c:if test="${!loop.first}">
+                                    <c:if test="${empty mcomma or mcomma eq 0}">
+                                        <c:out value=", " />
+                                    </c:if>
+
+                                    <c:if test="${not empty mcomma and mcomma eq 1}">
+                                        <c:set var="mcomma" value="0" />
+                                    </c:if>
+                                </c:if>
+
+
+
+                                <c:out value="${pr.insuranceObject.insuranceArea.address}"/>
+                            </c:if>
+                            <c:if test="${pr.deleted == true and loop.first}">
+                                <c:set var="mcomma" value="1" />
+                            </c:if>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+            </ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">${contract.catContract}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">${contract.catContractStatus}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">${contract.person}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">${contract.paymentWay}</ss:Data>
+        </ss:Cell>
+
+        <ss:Cell>
+            <ss:Data ss:Type="String">${contract.receiptNumber}</ss:Data>
+        </ss:Cell>
+
+
+
+    </ss:Row>
+
+</jsp:root>

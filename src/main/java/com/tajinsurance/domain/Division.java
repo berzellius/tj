@@ -2,13 +2,14 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Created by berz on 24.03.14.
  */
 @Entity
 @Table(name = "division")
-public class Division {
+public class Division implements Serializable {
 
 
 
@@ -50,5 +51,17 @@ public class Division {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof Division && getId().equals(((Division) obj).getId());
     }
 }

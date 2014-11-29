@@ -4,15 +4,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import com.tajinsurance.domain.City;
 
 /**
  * Created by berz on 24.03.14.
  */
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "person_id_generator")
     @SequenceGenerator(name = "person_id_generator", sequenceName = "person_id_seq")
@@ -21,6 +24,35 @@ public class Person {
     private Long id;
 
     public Person() {
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCityResident() {
+        return cityResident;
+    }
+
+    public void setCityResident(String cityResident) {
+        this.cityResident = cityResident;
+    }
+
+    public enum Sex {
+        MALE,
+        FEMALE
     }
 
     /*@Version*/
@@ -41,8 +73,13 @@ public class Person {
 
     private String middle;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date born;
+
+    @Column(name = "sex")
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Sex sex;
 
     @Column(name = "doc_series")
     private String docSeries;
@@ -50,12 +87,18 @@ public class Person {
     @Column(name = "doc_number")
     private String docNumber;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     @Column(name = "doc_date")
     private Date docDate;
 
     @Column(name = "doc_department")
     private String docDepartment;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "city_res")
+    private String cityResident;
 
     @Column(name = "index_regisrt")
     private String indexRegistr;
@@ -208,11 +251,42 @@ public class Person {
         this.email = email;
     }
 
-    @Override
-    public String toString(){
+    public int getAge(){
+        return getAge(new Date());
+    }
+
+    public int getAge(Date dt) {
+        Calendar dob = Calendar.getInstance();
+        if (getBorn() == null) return 0;
+        dob.setTime(getBorn());
+        Calendar today = Calendar.getInstance();
+        if (dt != null) today.setTime(dt);
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+            age--;
+        } else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+                && today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+            age--;
+        }
+
+        return age;
+    }
+
+    public String getFio(){
+        return this.getSurname() + " " + this.getName() + " " + this.getMiddle();
+    }
+
+    public String getFioWithBorn(){
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
-        String s = this.getSurname() + " " + this.getName() + " " + this.getMiddle() + ", " + (this.getBorn() != null ? f.format(this.getBorn()) : "") + "; ";
-        s += this.getDocSeries() + " № " + this.getDocNumber() + " " + this.getDocDepartment() + " / " + (this.getDocDate() != null?  f.format(this.getDocDate()) : "");
+        return this.getFio() + " " + (this.getBorn() != null ? f.format(this.getBorn()) : "");
+    }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+        String s = this.getSurname() + " " + this.getName() + " " + this.getMiddle(); //+ " " + (this.getBorn() != null ? f.format(this.getBorn()) : "");
+               /* + ", " + (this.getBorn() != null ? f.format(this.getBorn()) : "") + "; ";
+        s += this.getDocSeries() + " № " + this.getDocNumber() + " " + this.getDocDepartment() + " / " + (this.getDocDate() != null?  f.format(this.getDocDate()) : "");*/
         return s;
     }
 
@@ -222,5 +296,17 @@ public class Person {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Person && getId().equals(((Person) obj).getId());
     }
 }

@@ -47,6 +47,26 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
+    <context:property-placeholder location="classpath:tias.properties" />
+    <context:property-placeholder location="classpath:email.properties" />
+
+    <!-- email -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.yandex.ru"/>
+        <property name="port" value="25"/>
+        <property name="username" value="mail@bima.tj"/>
+        <property name="password" value="Wer13Let" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">false</prop>
+            </props>
+        </property>
+    </bean>
+
+
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
         <property name="url" value="${database.url}"/>
@@ -64,6 +84,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
+
     <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="persistenceUnit"/>
         <property name="dataSource" ref="dataSource"/>
@@ -84,5 +105,13 @@
     <bean class="com.tajinsurance.utils.CodeUtilsImpl" id="codeUtils" autowire="byType"></bean>
     <bean class="com.tajinsurance.service.RiskServiceImpl" id="riskService" autowire="byType"></bean>
     <bean class="com.tajinsurance.service.PremiumServiceImpl" id="premiumService" autowire="byType"></bean>
+    <bean class="com.tajinsurance.utils.LanguageUtilImpl" id="languageUtil" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.ForbiddenReceiptNumberServiceImpl" id="forbiddenReceiptNumberService" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.InsuranceAreaServiceImpl" id="insuranceAreaService" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.ProductProcessorImpl" id="productProcessor" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.ProductProcessorCU0Impl" id="productProcessorCU0" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.ProductProcessorBA0Impl" id="productProcessorBA0" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.ProductProcessorMP0Impl" id="productProcessorMP0" autowire="byType"></bean>
+    <bean class="com.tajinsurance.service.MailerServiceImpl" id="mailerService" autowire="byType"></bean>
     <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 </beans>

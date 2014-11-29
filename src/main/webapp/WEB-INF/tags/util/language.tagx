@@ -21,6 +21,9 @@
       <c:if test="${not empty param.size}">
         <spring:param name="size" value="${param.size}" />
       </c:if>
+      <c:if test="${null ne param.list}">
+          <spring:param name="list" />
+      </c:if>
     </spring:url>
     <spring:message code="global_language_switch" arguments="${label}" var="lang_label" htmlEscape="false" />
     <a href="${url}" title="${fn:escapeXml(lang_label)}">

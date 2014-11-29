@@ -2,6 +2,7 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "contract_premium")
-public class ContractPremium {
+public class ContractPremium implements Serializable {
     public ContractPremium() {
     }
 
@@ -49,6 +50,10 @@ public class ContractPremium {
     private boolean validated;
 
     private boolean deleted;
+
+    @JoinColumn(name = "insobj_id")
+    @OneToOne
+    private InsuranceObject insuranceObject;
 
     public Contract getContract() {
         return contract;
@@ -108,5 +113,19 @@ public class ContractPremium {
         return obj instanceof ContractPremium && getId() == ((ContractPremium) obj).getId();
     }
 
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
 
+        return result;
+    }
+
+
+    public InsuranceObject getInsuranceObject() {
+        return insuranceObject;
+    }
+
+    public void setInsuranceObject(InsuranceObject insuranceObject) {
+        this.insuranceObject = insuranceObject;
+    }
 }

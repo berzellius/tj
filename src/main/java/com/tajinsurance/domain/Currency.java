@@ -2,13 +2,14 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Created by berz on 02.04.14.
  */
 @Entity
 @Table(name = "currency")
-public class Currency {
+public class Currency  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "currency_id_generator")
@@ -51,5 +52,17 @@ public class Currency {
     @Override
     public String toString(){
         return getVal();
+    }
+
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof Currency && getId().equals(((Currency) obj).getId());
     }
 }

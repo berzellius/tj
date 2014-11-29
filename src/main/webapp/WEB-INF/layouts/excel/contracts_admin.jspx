@@ -1,0 +1,137 @@
+<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+             xmlns:c="http://java.sun.com/jsp/jstl/core"
+             xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+             xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+             xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+        >
+    <ss:Styles>
+        <ss:Style ss:ID="1">
+            <ss:Font ss:Bold="1"/>
+        </ss:Style>
+    </ss:Styles>
+    <ss:Worksheet ss:Name="Contracts from TIAS">
+        <ss:Table>
+            <!-- Columns -->
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+            <ss:Column ss:AutoFitWidth="1"/>
+
+
+            <!-- HEADER -->
+            <ss:Row>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">NUMBER</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">START_DATE</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">END_DATE</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">APP_DATE</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">PAY_DATE</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">RISK</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">INSURED_SUM</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">PREMIUM</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">ADDRESS</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">CATEGORY</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">STATUS</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">PERSON</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">USER</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">PARTNER</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">PAYMENT</ss:Data>
+                </ss:Cell>
+
+                <ss:Cell styleID="1">
+                    <ss:Data ss:Type="String">RECEIPT_NUMBER</ss:Data>
+                </ss:Cell>
+
+            </ss:Row>
+
+            <c:set var="i" value="0"/>
+            <c:forEach items="${data}" var="contract">
+                <c:choose>
+                    <c:when test="${contract.catContract.product eq 'MP0'}">
+                        <c:choose>
+                            <c:when test="${contract.contractPremiums ne null}">
+                                <c:forEach items="${contract.contractPremiums}" var="premium">
+                                    <c:if test="${premium.deleted != true}">
+                                        <util:excelContractAdminRow contract="${contract}"
+                                                                    contract_premium="${premium}"/>
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <util:excelContractAdminRow contract="${contract}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${contract.contractPremiums ne null}">
+                                <util:excelContractAdminRow contract="${contract}"
+                                                            contract_premiums="${contract.contractPremiums}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <util:excelContractAdminRow contract="${contract}"/>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
+
+
+                <c:set var="i" value="${i+1}"/>
+            </c:forEach>
+        </ss:Table>
+    </ss:Worksheet>
+</ss:Workbook>

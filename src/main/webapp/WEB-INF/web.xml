@@ -2,9 +2,9 @@
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     
-    <display-name>tajinsurance</display-name>
+    <display-name>Bima TIAS</display-name>
     
-    <description>Roo generated tajinsurance application</description>
+    <description>Bima insurance information system</description>
 
     
     <!-- Enable escaping of form submission contents -->
@@ -17,6 +17,11 @@
         <param-name>contextConfigLocation</param-name>
         <!-- classpath*:META-INF/spring/applicationContext*.xml -->
         <param-value>classpath*:META-INF/spring/applicationContext*.xml /WEB-INF/spring/security.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.properties</param-value>
     </context-param>
 
 

@@ -39,4 +39,16 @@ public class CatContractStatusLocaleEntity extends LocaleEntity {
         this.catContractStatus = catContractStatus;
     }
 
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof CatContractStatusLocaleEntity && getId().equals(((CatContractStatusLocaleEntity) obj).getId());
+    }
+
 }

@@ -2,6 +2,7 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 @Entity(name = "CatContractStatus")
 @Table(name = "cat_contract_status")
-public class CatContractStatus {
+public class CatContractStatus implements Localizable,Serializable {
 
     public CatContractStatus() {
     }
@@ -18,7 +19,9 @@ public class CatContractStatus {
         NEW,
         CANCELLED,
         ACCEPTED,
-        BEGIN
+        BEGIN,
+        WAIT_PHOTO,
+        WAIT_BIMA
     }
 
 
@@ -37,7 +40,8 @@ public class CatContractStatus {
         this.id = id;
     }
 
-    private String value;
+    @Transient
+    public String value;
 
     @Column(name = "code")
     @Enumerated(EnumType.STRING)
@@ -56,17 +60,31 @@ public class CatContractStatus {
     private List<CatContractStatusLocaleEntity> localeEntityList;
 
 
+    @Override
     public List<CatContractStatusLocaleEntity> getLocaleEntityList() {
         return this.localeEntityList;
     }
 
-    public void setLocaleEntityList(List<CatContractStatusLocaleEntity> localeEntityList) {
-        this.localeEntityList = localeEntityList;
+    @Override
+    public void setLocaleEntityList(List<? extends LocaleEntity> localeEntityList) {
+        this.localeEntityList = (List<CatContractStatusLocaleEntity>) localeEntityList;
     }
 
     @Override
     public String toString(){
         return getValue();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof CatContractStatus && getId().equals(((CatContractStatus) obj).getId());
+    }
+
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
     }
 
     public StatusCode getCode() {

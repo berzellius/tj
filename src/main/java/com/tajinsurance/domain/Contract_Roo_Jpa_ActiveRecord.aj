@@ -3,7 +3,6 @@
 
 package com.tajinsurance.domain;
 
-import org.hibernate.Session;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,30 +11,28 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 privileged aspect Contract_Roo_Jpa_ActiveRecord {
-    
+
     @PersistenceContext
     transient EntityManager Contract.entityManager;
 
-    Session session = Contract.entityManager().unwrap(Session.class);
 
 
-    
     public static final List<String> Contract.fieldNames4OrderClauseFilter = java.util.Arrays.asList("c_number", "c_memo");
-    
+
     public static final EntityManager Contract.entityManager() {
         EntityManager em = new Contract().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
-    
+
     public static long Contract.countContracts() {
         return entityManager().createQuery("SELECT COUNT(o) FROM Contract o", Long.class).getSingleResult();
     }
-    
+
     public static List<Contract> Contract.findAllContracts() {
         return entityManager().createQuery("SELECT o FROM Contract o", Contract.class).getResultList();
     }
-    
+
     public static List<Contract> Contract.findAllContracts(String sortFieldName, String sortOrder) {
         String jpaQuery = "SELECT o FROM Contract o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
@@ -46,16 +43,16 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
         }
         return entityManager().createQuery(jpaQuery, Contract.class).getResultList();
     }
-    
+
     public static Contract Contract.findContract(Long id) {
         if (id == null) return null;
         return entityManager().find(Contract.class, id);
     }
-    
+
     public static List<Contract> Contract.findContractEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Contract o WHERE deleted=false", Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery("SELECT o FROM Contract o WHERE deleted=false  ORDER BY startDate DESC", Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
-    
+
     public static List<Contract> Contract.findContractEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
         String jpaQuery = "SELECT o FROM Contract o WHERE deleted=false ";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
@@ -64,15 +61,19 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
+        else{
+            jpaQuery = jpaQuery + " ORDER BY startDate DESC";
+        }
         return entityManager().createQuery(jpaQuery, Contract.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
-    
+
+
     @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
-    
+
     @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -83,19 +84,19 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
             this.entityManager.remove(attached);
         }
     }
-    
+
     @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
-    
+
     @Transactional(propagation = Propagation.MANDATORY)
     public void Contract.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
-    
+
     @Transactional(propagation = Propagation.MANDATORY)
     public Contract Contract.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
@@ -103,5 +104,5 @@ privileged aspect Contract_Roo_Jpa_ActiveRecord {
         this.entityManager.flush();
         return merged;
     }
-    
+
 }

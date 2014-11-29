@@ -1,23 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
     <definition extends="default" name="contracts/clist">
         <put-attribute name="body" value="/WEB-INF/views/contracts/list.jspx"/>
     </definition>
-<definition extends="default" name="contracts/show">
+    <definition extends="standalone" name="ajax/contracts/clist">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/list.jspx"/>
+    </definition>
+    <definition extends="default" name="contracts/show">
         <put-attribute name="body" value="/WEB-INF/views/contracts/show.jspx"/>
     </definition>
-<definition extends="default" name="contracts/create">
+    <definition extends="default" name="contracts/create">
         <put-attribute name="body" value="/WEB-INF/views/contracts/create.jspx"/>
     </definition>
-<definition extends="default" name="contracts/update">
+    <definition extends="default" name="contracts/update">
         <put-attribute name="body" value="/WEB-INF/views/contracts/update.jspx"/>
     </definition>
-<definition extends="default" name="contracts/select_category">
-    <put-attribute name="body" value="/WEB-INF/views/contracts/select_category.jspx" />
-</definition>
+    <definition extends="default" name="contracts/select_category">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/select_category.jspx"/>
+    </definition>
 
-<definition extends="default" name="contracts/print">
-        <put-attribute name="body" value="/WEB-INF/views/contracts/print.jspx" />
-</definition>
+    <definition extends="default" name="contracts/print">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/print.jspx"/>
+    </definition>
+
+    <definition extends="printContract" name="contracts/print/cu0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/print_cu0.jspx"/>
+        <!--put-attribute name="receipt" value="/WEB-INF/views/contracts/receipt_partner.jspx" /-->
+    </definition>
+
+    <definition extends="printContract" name="contracts/print/ba0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/print_ba0.jspx"/>
+        <!--put-attribute name="receipt" value="/WEB-INF/views/contracts/receipt_partner.jspx" /-->
+    </definition>
+
+    <definition extends="printContract" name="contracts/print/mp0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/print_mp0.jspx"/>
+    </definition>
+
+    <definition extends="printReceipt" name="contracts/print/receipt/bima">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/receipt.jspx"/>
+    </definition>
+
+    <definition extends="printReceipt" name="contracts/print/receipt/partner">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/receipt_partner.jspx"/>
+    </definition>
+
+    <definition extends="default" name="contracts/calc">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/calc.jspx"/>
+    </definition>
+
+    <definition extends="contracts_excel" name="excel/contracts/export" />
+
+    <definition extends="contracts_excel_admin" name="excel/contracts/export/admin" />
+
+    <definition extends="contracts_excel_partner" name="excel/contracts/export/partner" />
+
+    <definition extends="contracts_excel_user" name="excel/contracts/export/user" />
+
+    <definition extends="standalone" name="contracts/insurance_objects">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/insurance_objects.jspx" />
+    </definition>
+
+    <definition extends="standalone" name="contracts/calc/form/cu0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/calc_form_cu0.jspx" />
+    </definition>
+
+    <definition extends="standalone" name="contracts/calc/form/ba0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/calc_form_ba0.jspx" />
+    </definition>
+
+    <definition extends="standalone" name="contracts/calc/form/mp0">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/calc_form_mp0.jspx" />
+    </definition>
+
+    <definition extends="standalone" name="contracts/image/edit">
+        <put-attribute name="body" value="/WEB-INF/views/contracts/image_edit.jspx" />
+    </definition>
+
 </tiles-definitions>

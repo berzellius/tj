@@ -2,8 +2,7 @@ package com.tajinsurance.service;
 
 import com.tajinsurance.domain.CatContractStatus;
 import com.tajinsurance.domain.CatContractStatusLocaleEntity;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import com.tajinsurance.utils.LanguageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,21 +15,21 @@ import java.util.List;
  * Created by berz on 22.03.14.
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class CatContractStatusServiceImpl implements CatContractStatusService {
     @Autowired
     EntityManager entityManager;
 
+    @Autowired
+    LanguageUtil languageUtil;
+
 
     @Override
     public List<CatContractStatus> getAllCatContractStatuses(String locale) {
-        Session session = entityManager.unwrap(Session.class);
-        List<CatContractStatus> cts = session.createCriteria(CatContractStatus.class).list();
+        List<CatContractStatus> cts = entityManager.createQuery("SELECT o FROM CatContractStatus o", CatContractStatus.class).getResultList();
         for(CatContractStatus ct : cts){
             for(CatContractStatusLocaleEntity ctl : ct.getLocaleEntityList()){
-                if(ctl.getLocale().equals(locale)){
-                    ct.setValue(ctl.getValue());
-                }
+                ct = (CatContractStatus) languageUtil.getLocalizatedObject(ct, locale);
             }
         }
         return cts;
@@ -38,17 +37,16 @@ public class CatContractStatusServiceImpl implements CatContractStatusService {
 
     @Override
     public CatContractStatus getCatContractStatusById(Long id) {
-        Session session = entityManager.unwrap(Session.class);
-        CatContractStatus ct = (CatContractStatus) session.get(CatContractStatus.class, id);
+        CatContractStatus ct = entityManager.find(CatContractStatus.class, id);
         if(ct == null) throw new EntityNotFoundException("cant find CatContractStatus object with id: "+id);
         return ct;
     }
 
     @Override
     public CatContractStatus getCatContractStatusByCode(CatContractStatus.StatusCode code) {
-        Session session = entityManager.unwrap(Session.class);
-        CatContractStatus ccs = (CatContractStatus) session.createCriteria(CatContractStatus.class)
-                .add(Restrictions.eq("code", code)).list().get(0);
+        CatContractStatus ccs = entityManager.createQuery("SELECT o FROM CatContractStatus o WHERE  code = :c", CatContractStatus.class)
+                .setParameter("c", code)
+                .getSingleResult();
         return ccs;
     }
 

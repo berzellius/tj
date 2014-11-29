@@ -1,7 +1,9 @@
 package com.tajinsurance.service;
 
+import com.tajinsurance.domain.City;
 import com.tajinsurance.domain.Person;
 import com.tajinsurance.dto.PersonAjax;
+import com.tajinsurance.exceptions.AgeException;
 import com.tajinsurance.exceptions.EntityNotSavedException;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,9 @@ public interface PersonService {
 
     public List<PersonAjax> searchPersonsByPerson(Person person);
 
-    public PersonAjax createNewPerson(Person person)  throws EntityNotSavedException;
+    public Person createNewPerson(Person person) throws EntityNotSavedException, AgeException;
 
     public Person edit(Person person);
+
+    public List<City> getCitiesByStr(String str);
 }

@@ -12,8 +12,15 @@
   <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
   <jsp:directive.attribute name="title" type="java.lang.String" required="false" description="Title" />
+    <jsp:directive.attribute name="submit" type="java.lang.Boolean" required="false" description="shall we render submit button?" />
+
 
   <c:if test="${empty render or render}">
+
+      <c:if test="${empty submit}">
+          <c:set var="submit" value="true" />
+      </c:if>
+
     <c:if test="${empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
     </c:if>
@@ -40,11 +47,13 @@
       <form:form action="${form_url}" method="PUT" modelAttribute="${modelAttribute}" enctype="${enctype}">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;" />
         <jsp:doBody />
-        <div class="submit" id="${fn:escapeXml(id)}_submit">
-          <spring:message code="button_save" var="save_button" htmlEscape="false" />
-          <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-          <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" />
-        </div>
+        <c:if test="${submit}">
+            <div class="submit" id="${fn:escapeXml(id)}_submit">
+              <spring:message code="button_save" var="save_button" htmlEscape="false" />
+              <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+              <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" />
+            </div>
+        </c:if>
         <form:hidden id="_${fn:escapeXml(idField)}_id" path="${fn:escapeXml(idField)}" />
         <c:if test="${versionField ne 'none'}">
           <form:hidden id="_${fn:escapeXml(versionField)}_id" path="${fn:escapeXml(versionField)}" />

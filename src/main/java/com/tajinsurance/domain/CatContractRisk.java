@@ -2,6 +2,7 @@ package com.tajinsurance.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "cat_contract_risk")
-public class CatContractRisk {
+public class CatContractRisk implements Serializable {
     public CatContractRisk() {
     }
 
@@ -29,6 +30,36 @@ public class CatContractRisk {
     private Risk risk;
 
     private BigDecimal rate;
+
+    @Column(name = "month_tarif")
+    private BigDecimal monthTarif;
+
+
+    @Column(name = "min_sum")
+    private BigDecimal minSum;
+
+    @Column(name = "max_sum")
+    private BigDecimal maxSum;
+
+
+    @OneToOne
+    @JoinColumn(name = "partner")
+    private Partner partner;
+
+    private BigDecimal correlation;
+
+    @Override
+    public boolean equals(Object obj){
+        return obj instanceof CatContractRisk && getId().equals(((CatContractRisk) obj).getId());
+    }
+
+    @Override
+    public int hashCode(){
+        int result = (int) (getId() ^ (getId() >>> 32));
+
+        return result;
+    }
+
 
     public Long getId() {
         return id;
@@ -61,5 +92,45 @@ public class CatContractRisk {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    public BigDecimal getMonthTarif() {
+        return monthTarif;
+    }
+
+    public void setMonthTarif(BigDecimal monthTarif) {
+        this.monthTarif = monthTarif;
+    }
+
+    public Partner getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Partner partner) {
+        this.partner = partner;
+    }
+
+    public BigDecimal getMinSum() {
+        return minSum;
+    }
+
+    public void setMinSum(BigDecimal minSum) {
+        this.minSum = minSum;
+    }
+
+    public BigDecimal getMaxSum() {
+        return maxSum;
+    }
+
+    public void setMaxSum(BigDecimal maxSum) {
+        this.maxSum = maxSum;
+    }
+
+    public BigDecimal getCorrelation() {
+        return correlation;
+    }
+
+    public void setCorrelation(BigDecimal correlation) {
+        this.correlation = correlation;
     }
 }

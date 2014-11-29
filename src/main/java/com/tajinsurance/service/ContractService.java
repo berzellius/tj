@@ -1,11 +1,8 @@
 package com.tajinsurance.service;
 
-import com.tajinsurance.domain.CatContract;
-import com.tajinsurance.domain.Contract;
-import com.tajinsurance.domain.Risk;
-import com.tajinsurance.domain.User;
-import com.tajinsurance.exceptions.EntityNotSavedException;
-import com.tajinsurance.exceptions.NoEntityException;
+import com.tajinsurance.domain.*;
+import com.tajinsurance.dto.AjaxContractListFilter;
+import com.tajinsurance.exceptions.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,6 +13,8 @@ import java.util.List;
  */
 @Service
 public interface ContractService {
+    List<Contract> localizeContractsList(List<Contract> cts, String locale);
+
     /**
      * Контракт по id
      * @param id
@@ -53,6 +52,8 @@ public interface ContractService {
      */
     List<Contract> getContractsPage(Integer numPage, Integer itemsToPage, String sortFieldName, String sortOrder);
 
+    List<Contract> getContractsPage(AjaxContractListFilter filter, Integer numPage, Integer itemsToPage, String sortFieldName, String sortOrder);
+
     /**
      * Количество контрактов
      * @return
@@ -82,6 +83,10 @@ public interface ContractService {
     Date printContract(Contract c);
 
     /**
+     * Бизнес логика: отменить договор
+     */
+    void cancelContract(Contract c);
+    /**
      * Количество страниц
      * @param size - контрактов на страницу
      * @return
@@ -90,7 +95,38 @@ public interface ContractService {
 
     void save(Contract contract) throws EntityNotSavedException;
 
-    void update(Contract contract) throws NoEntityException;
+    void update(Contract contract, Boolean managerMode) throws NoEntityException, CalculatePremiumException, NoPersonToContractException, BadContractDataException, NoRelatedContractNumber;
 
     void delete(Long id) throws NoEntityException;
+
+    Contract dropPrintClaimFlag(Contract c);
+
+    void setPersonToContract(Contract contract);
+
+    List<PaymentWay> getAllPaymentWays();
+
+    PaymentWay getPaymentWayById(Long id);
+
+    /**
+     * Присвоить номер квитанции
+     * @param contract - договор
+     * @param month - месяц ГГГГММ
+     */
+    void setReceiptNumber(Contract contract, Integer month);
+
+    void setReceiptNumber(Contract contract);
+
+    ContractImage getContractImageById(Long id);
+
+    void acceptContract(Contract contract);
+
+    void deleteImage(ContractImage contractImage);
+
+    void updateImage(ContractImage contractImage);
+
+    List<Contract> getAllContracts(String locale);
+
+    List<Contract> getAllContracts(String language, Partner partner);
+
+    List<Contract> getAllContracts(String language, User user);
 }
